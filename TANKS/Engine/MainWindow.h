@@ -18,7 +18,6 @@ protected:
 protected:
 	HWND hWnd = nullptr;
 };
-
 class MainWindow : public HWNDKey
 {
 public:
@@ -55,7 +54,7 @@ public:
 	Keyboard kbd;
 	Mouse mouse;
 private:
-	static constexpr wchar_t* wndClassName = L"Chili DirectX Framework Window";
+	static constexpr wchar_t* wndClassName = L"Tanks";
 	HINSTANCE hInst = nullptr;
 	std::wstring args;
 };
