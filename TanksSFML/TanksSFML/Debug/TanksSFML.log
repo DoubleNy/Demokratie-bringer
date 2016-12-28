@@ -1,0 +1,12 @@
+﻿  game.cpp
+c:\users\cristian\desktop\tankssfml\tankssfml\tile.cpp(34): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\cristian\desktop\tankssfml\tankssfml\tile.cpp(35): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\cristian\desktop\tankssfml\tankssfml\tile.cpp(36): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\cristian\desktop\tankssfml\tankssfml\tile.cpp(37): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\cristian\desktop\tankssfml\tankssfml\tile.cpp(40): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\cristian\desktop\tankssfml\tankssfml\tile.cpp(41): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\cristian\desktop\tankssfml\tankssfml\tile.cpp(42): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\cristian\desktop\tankssfml\tankssfml\tile.cpp(43): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\cristian\desktop\tankssfml\tankssfml\game.cpp(65): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+  TanksSFML.vcxproj -> C:\Users\Cristian\Desktop\TanksSFML\Debug\TanksSFML.exe
+  TanksSFML.vcxproj -> C:\Users\Cristian\Desktop\TanksSFML\Debug\TanksSFML.pdb (Full PDB)
