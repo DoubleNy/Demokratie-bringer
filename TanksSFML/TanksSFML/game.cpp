@@ -9,7 +9,7 @@
 
 void game() {
 
-	// Creare fereastra de joc, dimensiune 924 x 704
+	// Creare fereastra de joc, dimensiune 924 x 704 FINALLY?
 	sf::RenderWindow window(sf::VideoMode(924, 704), "Tanks ");
 	// Creare jucator
 	sf::RectangleShape player(sf::Vector2f(80.0f, 65.0f));
