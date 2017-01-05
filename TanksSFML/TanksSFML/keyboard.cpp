@@ -15,3 +15,6 @@ bool KeyRight() {
 bool KeyEsc() {
 	return(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape));
 }
+bool Space() {
+	return(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space));
+}

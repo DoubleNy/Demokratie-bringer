@@ -36,6 +36,9 @@
     <ClCompile Include="getStart.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="attack.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h">
@@ -57,6 +60,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="getStart.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="attack.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -6,3 +6,4 @@ bool KeyDown();
 bool KeyLeft();
 bool KeyRight();
 bool KeyEsc();
+bool Space();
