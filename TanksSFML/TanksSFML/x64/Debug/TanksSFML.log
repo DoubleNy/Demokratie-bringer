@@ -1,2 +1,23 @@
-﻿  TanksSFML.vcxproj -> C:\Users\Cristian\Desktop\Demokratie-bringer\TanksSFML\x64\Debug\TanksSFML.exe
-  TanksSFML.vcxproj -> C:\Users\Cristian\Desktop\Demokratie-bringer\TanksSFML\x64\Debug\TanksSFML.pdb (Full PDB)
+﻿  game.cpp
+c:\users\cristian\desktop\demokratie-bringer\tankssfml\tankssfml\tile.cpp(34): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\cristian\desktop\demokratie-bringer\tankssfml\tankssfml\tile.cpp(35): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\cristian\desktop\demokratie-bringer\tankssfml\tankssfml\tile.cpp(36): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\cristian\desktop\demokratie-bringer\tankssfml\tankssfml\tile.cpp(37): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\cristian\desktop\demokratie-bringer\tankssfml\tankssfml\tile.cpp(40): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\cristian\desktop\demokratie-bringer\tankssfml\tankssfml\tile.cpp(41): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\cristian\desktop\demokratie-bringer\tankssfml\tankssfml\tile.cpp(42): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\cristian\desktop\demokratie-bringer\tankssfml\tankssfml\tile.cpp(43): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\cristian\desktop\demokratie-bringer\tankssfml\tankssfml\game.cpp(60): error C2065: 'white': undeclared identifier
+c:\users\cristian\desktop\demokratie-bringer\tankssfml\tankssfml\game.cpp(90): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+c:\users\cristian\desktop\demokratie-bringer\tankssfml\tankssfml\game.cpp(100): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+c:\users\cristian\desktop\demokratie-bringer\tankssfml\tankssfml\game.cpp(108): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\cristian\desktop\demokratie-bringer\tankssfml\tankssfml\game.cpp(110): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+c:\users\cristian\desktop\demokratie-bringer\tankssfml\tankssfml\game.cpp(120): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+c:\users\cristian\desktop\demokratie-bringer\tankssfml\tankssfml\game.cpp(128): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+c:\users\cristian\desktop\demokratie-bringer\tankssfml\tankssfml\game.cpp(177): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+c:\users\cristian\desktop\demokratie-bringer\tankssfml\tankssfml\game.cpp(183): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+c:\users\cristian\desktop\demokratie-bringer\tankssfml\tankssfml\game.cpp(183): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\cristian\desktop\demokratie-bringer\tankssfml\tankssfml\game.cpp(189): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+c:\users\cristian\desktop\demokratie-bringer\tankssfml\tankssfml\game.cpp(189): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\cristian\desktop\demokratie-bringer\tankssfml\tankssfml\game.cpp(195): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+c:\users\cristian\desktop\demokratie-bringer\tankssfml\tankssfml\game.cpp(195): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
