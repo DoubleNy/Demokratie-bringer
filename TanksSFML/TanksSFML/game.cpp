@@ -72,6 +72,7 @@ void game() {
 	//sf::Text Lst;
 	sf::Text fps;
 	sf::Font font;
+	int cnt = 0;
 	if (!font.loadFromFile("arial.ttf"))
 	{
 		std::cout << "O eroare cu fontul ... " << std::endl;
@@ -136,6 +137,7 @@ void game() {
 	icon.loadFromFile("icon.png");
 	window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 	//
+	int nextMove;
 	sf::Clock clock;
 	sf::Time time;
 	bool  setted1 = 0, st1 = 0;
@@ -199,11 +201,16 @@ void game() {
 					}
 
 		//Coordonare cu primul dusman in map1
-		//Daca se paleste de perete, se intoarce 
-		std::string nextMove = next(enemy.getPosition().x, enemy.getPosition().y, player.getPosition().x, player.getPosition().y);
-		std::cout << nextMove << std::endl;
+		//Daca se paleste de perete, se intoarce
+		if (!cnt) {
+		 nextMove = next(enemy.getPosition().x, enemy.getPosition().y, player.getPosition().x, player.getPosition().y);
+			cnt = 20;
+		}
+		else
+			cnt--;
+		//std::cout << nextMove << std::endl;
 		//if (!intersect(player.getPosition().x, player.getPosition().y, 25, enemy.getPosition().x, enemy.getPosition().y, 25)) {
-		if (nextMove == "up")
+		if (nextMove == 1)
 		if (enemy.getPosition().y < 40 || obstacleUp(enemy.getPosition().x, enemy.getPosition().y))
 				enemy.move(0, 0);
 			else{
@@ -211,7 +218,7 @@ void game() {
 				enemy.move(0.0, -6.0);
 				x0 = 70;
 			}
-		if (nextMove == "down") 
+		if (nextMove == 2) 
 		if (enemy.getPosition().y > window.getSize().y - 100 || obstacleDown(enemy.getPosition().x, enemy.getPosition().y))
 			enemy.move(0, 0);
 		else{
@@ -219,7 +226,7 @@ void game() {
 				enemy.move(0.0, 6.0);
 				x0 = 0;
 		}
-		if (nextMove == "left")
+		if (nextMove == 3)
 		if (enemy.getPosition().x < 40 || obstacleRight(enemy.getPosition().x, enemy.getPosition().y))
 			enemy.move(0, 0);
 		else{
@@ -227,7 +234,7 @@ void game() {
 			enemy.move(-6, 0);
 			x0 = 3 * 69;
 		}
-		if (nextMove == "right")
+		if (nextMove == 4)
 		if ((enemy.getPosition().x >= window.getSize().x - 100) || obstacleLeft(enemy.getPosition().x, enemy.getPosition().y))
 			enemy.move(0, 0);
 		else{
