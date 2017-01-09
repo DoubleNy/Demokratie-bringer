@@ -4,17 +4,17 @@
 
 void attack( sf::RectangleShape &fire, sf::RectangleShape player, sf::RectangleShape enemy,   int case0) {
 	if (case0 == 0) 
-		fire.setPosition( player.getPosition().x + 31 , player.getPosition().y - 12);
+			fire.setPosition( player.getPosition().x + 31 , player.getPosition().y - 12);
 	if (case0 == 1)
-		fire.setPosition(player.getPosition().x + 31, player.getPosition().y +30);
+			fire.setPosition(player.getPosition().x + 31, player.getPosition().y +30);
 	if (case0 == 2)
-		fire.setPosition(player.getPosition().x, player.getPosition().y + 20 );
+			fire.setPosition(player.getPosition().x, player.getPosition().y + 20 );
 	if(case0 == 3)
-		fire.setPosition(player.getPosition().x + 51, player.getPosition().y + 20);
+			fire.setPosition(player.getPosition().x + 51, player.getPosition().y + 20);
 }
 
-/*
-void check(bool &st1, bool &st2, bool &st3, bool &st4, int &eHealth, sf::RectangleShape &fire, sf::RectangleShape &enemy) {
+
+void check(bool &st1, bool &st2, bool &st3, bool &st4, int &eHealth, sf::RectangleShape &fire, sf::RectangleShape &enemy, sf::RenderWindow &window) {
 	if (st1 && !st2 && !st3 && !st4) {
 		fire.move(0, -15);
 		window.draw(fire);
@@ -59,4 +59,4 @@ void check(bool &st1, bool &st2, bool &st3, bool &st4, int &eHealth, sf::Rectang
 					}
 				}
 
-} */
+} 

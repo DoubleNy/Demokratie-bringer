@@ -4,6 +4,5 @@
 #include <iostream>
 #include "game.h"
 #include <time.h>
-
-
+extern int choosedMap;
 int start();
