@@ -445,7 +445,7 @@ void game() {
 				case0 = 0;
 				x = 68;	a = 79; b = 63; // niste numere calculate cu precizie pentru a decupa partea necesara a tankului din poza cu ... tankuri . (?)
 										//Daca pe axa y ne aflam intr-o pozitie cu y > 0 , continuam sa ne deplasam spre origine, altfel nu.
-				if (player.getPosition().y < 0 || obstacleUp(player.getPosition().x, player.getPosition().y))
+				if (player.getPosition().y < 0)
 					player.move(0, 0);
 				else
 					player.move(0.0, -10.0);
@@ -455,7 +455,7 @@ void game() {
 					case0 = 1;
 					x = 0;	a = 79; b = 63; // aceleasi numere;
 											//Daca pe axa y ne afla intr-o pozitie cu y < window.Size().y , continuam sa ne deplasam spre margine, altfel nu.
-					if (player.getPosition().y > window.getSize().y - 70 || obstacleDown(player.getPosition().x, player.getPosition().y))
+					if (player.getPosition().y > window.getSize().y - 70)
 						player.move(0, 0);
 					else
 						player.move(0.0, 10.0);
@@ -465,7 +465,7 @@ void game() {
 						case0 = 2;
 						x = 3 * 69.4; a = 78; b = 62;
 						//Daca pe axa x ne aflam intr-o pozitie cu x > 0 ...sau nu intilnim un obstacol , continuam sa ne deplasam spre origine, altfel nu.
-						if (player.getPosition().x < 0 || obstacleRight(player.getPosition().x, player.getPosition().y))
+						if (player.getPosition().x < 0 )
 							player.move(0, 0);
 						else
 							player.move(-10.0, 0.0);
@@ -475,7 +475,7 @@ void game() {
 							case0 = 3;
 							x = 2 * 68; a = 79; b = 63;
 							//Daca pe axa x ne aflam intr-o pozitie cu x < window.getSize().x ...sau nu intilnim un obstacol , continuam sa ne deplasam spre margine, altfel nu.
-							if ((player.getPosition().x >= window.getSize().x - 70) || obstacleLeft(player.getPosition().x, player.getPosition().y))
+							if ((player.getPosition().x >= window.getSize().x - 70) )
 								player.move(0, 0);
 							else
 								player.move(10.0, 0.0);
