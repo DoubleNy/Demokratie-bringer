@@ -11,6 +11,7 @@ int next(int ex, int ey, int px, int py) {
 	int ans = rand() % 4 + 1;
 	return(ans);
 	/*
+	//bug
 	if (ans == 1)
 		return("up");
 	if (ans == 2)
