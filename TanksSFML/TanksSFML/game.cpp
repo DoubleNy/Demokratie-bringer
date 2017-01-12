@@ -11,6 +11,8 @@
 #include "AI.hpp"
 #include "getStart.hpp"
 #include "SFML\Audio.hpp"
+int choosedTank = 0;
+float DEGTORAD = 0.017453f;
 //using namespace std;
 void game() {
 	srand(time(NULL));
@@ -23,7 +25,7 @@ void game() {
 	music.setPitch(1.5);
 	sf::RenderWindow window(sf::VideoMode(924, 704), "Tanks ");	// Creare fereastra de joc, dimensiune 924 x 704 FINALLY?
 	sf::RenderWindow details(sf::VideoMode(924, 100), "Details"); // Creare fereastra cu detalii din joc
-	sf::RectangleShape player(sf::Vector2f(80.0f, 65.0f)); // Creare jucator
+	sf::RectangleShape player(sf::Vector2f(80, 75)); // Creare jucator
 
 	sf::RectangleShape heartOne(sf::Vector2f(50, 35)); // Inima
 	sf::RectangleShape exploded(sf::Vector2f(80, 80)); // explozie
@@ -31,117 +33,122 @@ void game() {
 	sf::RectangleShape fire(sf::Vector2f(20, 20)); // foc 
 	sf::RectangleShape fire1(sf::Vector2f(20, 20));
 	sf::Sprite explosion[26];
-	sf::Texture txt1;
-	txt1.loadFromFile("1.png");
-	explosion[1].setTexture(txt1);
+	if (1) {
+		sf::Texture txt1;
+		txt1.loadFromFile("1.png");
+		explosion[1].setTexture(txt1);
 
-	sf::Texture txt2;
-	txt2.loadFromFile("2.png");
-	explosion[2].setTexture(txt2);
-	
-	sf::Texture txt3;
-	txt3.loadFromFile("3.png");
-	explosion[3].setTexture(txt3);
+		sf::Texture txt2;
+		txt2.loadFromFile("2.png");
+		explosion[2].setTexture(txt2);
 
-	sf::Texture txt4;
-	txt4.loadFromFile("4.png");
-	explosion[4].setTexture(txt4);
+		sf::Texture txt3;
+		txt3.loadFromFile("3.png");
+		explosion[3].setTexture(txt3);
 
-	sf::Texture txt5;
-	txt5.loadFromFile("5.png");
-	explosion[5].setTexture(txt5);
+		sf::Texture txt4;
+		txt4.loadFromFile("4.png");
+		explosion[4].setTexture(txt4);
 
-	sf::Texture txt6;
-	txt6.loadFromFile("6.png");
-	explosion[6].setTexture(txt6);
+		sf::Texture txt5;
+		txt5.loadFromFile("5.png");
+		explosion[5].setTexture(txt5);
 
-	sf::Texture txt7;
-	txt7.loadFromFile("7.png");
-	explosion[7].setTexture(txt7);
+		sf::Texture txt6;
+		txt6.loadFromFile("6.png");
+		explosion[6].setTexture(txt6);
 
-	sf::Texture txt8;
-	txt8.loadFromFile("8.png");
-	explosion[8].setTexture(txt8);
-	
-	sf::Texture txt9;
-	txt9.loadFromFile("9.png");
-	explosion[9].setTexture(txt9);
-	
-	sf::Texture txt10;
-	txt10.loadFromFile("10.png");
-	explosion[10].setTexture(txt10);
-	
-	sf::Texture txt11;
-	txt11.loadFromFile("11.png");
-	explosion[11].setTexture(txt11);
-	
-	sf::Texture txt12;
-	txt12.loadFromFile("12.png");
-	explosion[12].setTexture(txt12);
-	
-	sf::Texture txt13;
-	txt13.loadFromFile("13.png");
-	explosion[13].setTexture(txt13);
-	
-	sf::Texture txt14;
-	txt14.loadFromFile("14.png");
-	explosion[14].setTexture(txt14);
-	
-	sf::Texture txt15;
-	txt15.loadFromFile("15.png");
-	explosion[15].setTexture(txt15);
-	
-	sf::Texture txt16;
-	txt16.loadFromFile("16.png");
-	explosion[16].setTexture(txt16);
-	
-	sf::Texture txt17;
-	txt17.loadFromFile("17.png");
-	explosion[17].setTexture(txt17);
-	
-	sf::Texture txt18;
-	txt18.loadFromFile("18.png");
-	explosion[18].setTexture(txt18);
-	
-	sf::Texture txt19;
-	txt19.loadFromFile("19.png");
-	explosion[19].setTexture(txt19);
-	
-	sf::Texture txt20;
-	txt20.loadFromFile("20.png");
-	explosion[20].setTexture(txt20);
-	
-	sf::Texture txt21;
-	txt21.loadFromFile("21.png");
-	explosion[21].setTexture(txt21);
-	
-	sf::Texture txt22;
-	txt22.loadFromFile("22.png");
-	explosion[22].setTexture(txt22);
-	
-	sf::Texture txt23;
-	txt23.loadFromFile("23.png");
-	explosion[23].setTexture(txt23);
-	
-	sf::Texture txt24;
-	txt24.loadFromFile("24.png");
-	explosion[24].setTexture(txt24);
-	
-	sf::Texture txt25;
-	txt25.loadFromFile("25.png");
-	explosion[25].setTexture(txt25);
+		sf::Texture txt7;
+		txt7.loadFromFile("7.png");
+		explosion[7].setTexture(txt7);
 
-	player.setPosition(-8.0, 0.0); // setare pozitie de start pentru jucator
+		sf::Texture txt8;
+		txt8.loadFromFile("8.png");
+		explosion[8].setTexture(txt8);
+
+		sf::Texture txt9;
+		txt9.loadFromFile("9.png");
+		explosion[9].setTexture(txt9);
+
+		sf::Texture txt10;
+		txt10.loadFromFile("10.png");
+		explosion[10].setTexture(txt10);
+
+		sf::Texture txt11;
+		txt11.loadFromFile("11.png");
+		explosion[11].setTexture(txt11);
+
+		sf::Texture txt12;
+		txt12.loadFromFile("12.png");
+		explosion[12].setTexture(txt12);
+
+		sf::Texture txt13;
+		txt13.loadFromFile("13.png");
+		explosion[13].setTexture(txt13);
+
+		sf::Texture txt14;
+		txt14.loadFromFile("14.png");
+		explosion[14].setTexture(txt14);
+
+		sf::Texture txt15;
+		txt15.loadFromFile("15.png");
+		explosion[15].setTexture(txt15);
+
+		sf::Texture txt16;
+		txt16.loadFromFile("16.png");
+		explosion[16].setTexture(txt16);
+
+		sf::Texture txt17;
+		txt17.loadFromFile("17.png");
+		explosion[17].setTexture(txt17);
+
+		sf::Texture txt18;
+		txt18.loadFromFile("18.png");
+		explosion[18].setTexture(txt18);
+
+		sf::Texture txt19;
+		txt19.loadFromFile("19.png");
+		explosion[19].setTexture(txt19);
+
+		sf::Texture txt20;
+		txt20.loadFromFile("20.png");
+		explosion[20].setTexture(txt20);
+
+		sf::Texture txt21;
+		txt21.loadFromFile("21.png");
+		explosion[21].setTexture(txt21);
+
+		sf::Texture txt22;
+		txt22.loadFromFile("22.png");
+		explosion[22].setTexture(txt22);
+
+		sf::Texture txt23;
+		txt23.loadFromFile("23.png");
+		explosion[23].setTexture(txt23);
+
+		sf::Texture txt24;
+		txt24.loadFromFile("24.png");
+		explosion[24].setTexture(txt24);
+
+		sf::Texture txt25;
+		txt25.loadFromFile("25.png");
+		explosion[25].setTexture(txt25);
+	}
+	player.setPosition(30, 30); // setare pozitie de start pentru jucator
 	enemy.setPosition(860, 600); // setare pozitie de start pentru inamic
 	details.setPosition(sf::Vector2i(500, 50)); // setare pozitie pentru fereastra details.
 
 	sf::Texture heart;                 //  Incarcare imagine inima 
 	heart.loadFromFile("heart.png");
 	heartOne.setTexture(&heart);
-
+	//sf::Sprite bag;
 	sf::Texture texture; // Incarcare imagine inamic,jucator
+	//if (choosedTank == 0) {
+		sf::Texture tnk1;
+		tnk1.loadFromFile("tank1.png");
+		player.setTexture(&tnk1);
+	//}
 	texture.loadFromFile("tank.png");
-	player.setTexture(&texture);
 	enemy.setTexture(&texture);
 
 	sf::Texture firetext; // Incarcare imagine foc
@@ -159,108 +166,114 @@ void game() {
 		std::cin.get();
 		return;
 	}
-	if (!map1.load("tileset.png", sf::Vector2u(32, 32), level0, 29, 22)){
+	if (!map1.load("tileset.png", sf::Vector2u(32, 32), level0, 29, 22)) {
 		std::cout << "Altfel de eroare!!" << std::endl;
 		std::cin.get();
 		return;
 	}
 	//
 	sf::Font font;
-	if (!font.loadFromFile("arial.ttf")){
+	if (!font.loadFromFile("arial.ttf")) {
 		std::cout << "O eroare cu fontul ... " << std::endl;
 		std::cin.get();
 		return;
 	}
 	//
 
-	sf::Text playerHealth; // textul din fereastra details.
-		playerHealth.setFont(font);
-		playerHealth.setString("100");
-		playerHealth.setCharacterSize(20);
-		playerHealth.setFillColor(sf::Color::White);
-		playerHealth.setStyle(sf::Text::Bold);
-		playerHealth.setPosition(500, 0);
+		sf::Text playerHealth; // textul din fereastra details.
+	playerHealth.setFont(font);
+	playerHealth.setString("100");
+	playerHealth.setCharacterSize(20);
+	playerHealth.setFillColor(sf::Color::White);
+	playerHealth.setStyle(sf::Text::Bold);
+	playerHealth.setPosition(500, 0);
 
 	sf::Text enemyHealth;
-		enemyHealth.setFont(font);
-		enemyHealth.setString("100");
-		enemyHealth.setCharacterSize(20);
-		enemyHealth.setFillColor(sf::Color::White);
-		enemyHealth.setStyle(sf::Text::Bold);
-		enemyHealth.setPosition(800, 0);
+	enemyHealth.setFont(font);
+	enemyHealth.setString("100");
+	enemyHealth.setCharacterSize(20);
+	enemyHealth.setFillColor(sf::Color::White);
+	enemyHealth.setStyle(sf::Text::Bold);
+	enemyHealth.setPosition(800, 0);
 
 	sf::Text playerName;
-		playerName.setFont(font);
-		playerName.setString("PLAYER:");
-		playerName.setCharacterSize(20);
-		playerName.setFillColor(sf::Color::White);
-		playerName.setStyle(sf::Text::Bold);
-		playerName.setPosition(400, 0);
+	playerName.setFont(font);
+	playerName.setString("PLAYER:");
+	playerName.setCharacterSize(20);
+	playerName.setFillColor(sf::Color::White);
+	playerName.setStyle(sf::Text::Bold);
+	playerName.setPosition(400, 0);
 
 	sf::Text enemyName;
-		enemyName.setFont(font);
-		enemyName.setString("ENEMY:");
-		enemyName.setCharacterSize(20);
-		enemyName.setFillColor(sf::Color::White);
-		enemyName.setStyle(sf::Text::Bold);
-		enemyName.setPosition(700, 0);
+	enemyName.setFont(font);
+	enemyName.setString("ENEMY:");
+	enemyName.setCharacterSize(20);
+	enemyName.setFillColor(sf::Color::White);
+	enemyName.setStyle(sf::Text::Bold);
+	enemyName.setPosition(700, 0);
 
 	sf::Text text;
-		text.setFont(font);
-		text.setString("30 ");
-		text.setCharacterSize(20);
-		text.setFillColor(sf::Color::White);
-		text.setStyle(sf::Text::Bold);
+	text.setFont(font);
+	text.setString("30 ");
+	text.setCharacterSize(20);
+	text.setFillColor(sf::Color::White);
+	text.setStyle(sf::Text::Bold);
 	//
 	sf::Text Win;
-		Win.setFont(font);
-		Win.setString("YOU WON !!!");
-		Win.setCharacterSize(70);
-		Win.setFillColor(sf::Color::White);
-		Win.setStyle(sf::Text::Bold);	
+	Win.setFont(font);
+	Win.setString("YOU WON !!!");
+	Win.setCharacterSize(70);
+	Win.setFillColor(sf::Color::White);
+	Win.setStyle(sf::Text::Bold);
 	sf::Text fps;
-		fps.setFont(font);
-		fps.setString("FPS");
-		fps.setCharacterSize(20);
-		fps.setFillColor(sf::Color::White);
-		fps.setStyle(sf::Text::Bold);
-		fps.setPosition(40, 0);
-		
+	fps.setFont(font);
+	fps.setString("FPS");
+	fps.setCharacterSize(20);
+	fps.setFillColor(sf::Color::White);
+	fps.setStyle(sf::Text::Bold);
+	fps.setPosition(40, 0);
+
 	sf::Image icon;
 	if (!icon.loadFromFile("icon.png")) {
 		std::cout << "Probleme cu iconita";
 		return;
-	}
+   }
+	player.setOrigin(80 / 2, 60 / 2);
 	window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
-	bool isMoving = 1;
-	int cnt = 0;
-	int pHealth = 100;
-	int eHealth = 100;
-	int nextMove = 1;
-	int x = 0;
-	int a = 79;
-	int b = 63;
-	int x0 = 70;
-	int exp = 0;
-	int playerLifes = 3;
-	int enemyLifes = 3;
-	int case0 = 0, cs0 = 0, ja = 0;
-	bool  setted1 = 0, st1 = 0;
-	bool  setted2 = 0, st2 = 0;
-	bool  setted3 = 0, st3 = 0;
-	bool  setted4 = 0, st4 = 0;
-	int timerFirePlayer = 0;
-	int timerFireEnemy = 0;
-	std::string str;
-	int fp;
-	int ripPlayer = 0;
-	sf::Clock clock;
-	sf::Time time;
+		bool isMoving = 1;
+		int cnt = 0;
+		int pHealth = 100;
+		int eHealth = 100;
+		int nextMove = 1;
+		int x = 0;
+		int a = 79;
+		int b = 63;
+		int x0 = 70;
+		int exp = 0;
+		int playerLifes = 3;
+		int enemyLifes = 3;
+		int case0 = 0, cs0 = 0, ja = 0;
+		bool  setted1 = 0, st1 = 0;
+		bool  setted2 = 0, st2 = 0;
+		bool  setted3 = 0, st3 = 0;
+		bool  setted4 = 0, st4 = 0;
+		int timerFirePlayer = 0;
+		int timerFireEnemy = 0;
+		std::string str;
+		int fp;
+		int ripPlayer = 0;
+		sf::Clock clock;
+		sf::Time time;
+		bool thrust = 0;
+		int angle = -90;
+		float cx = 30, cy = 30;
+		float dx = 0, dy = 0;
 	window.setFramerateLimit(30);//fixare limita fps		
 	//Loop-ul principal;
 	moving.setLoop(1);
 	moving.play();
 	while (window.isOpen()) {
+		thrust = false;
 		ja = 0;
 		//eveniment pentru inchiderea ferestrei
 		sf::Event event;
@@ -279,47 +292,95 @@ void game() {
 			if (KeyUp()) {
 				ja = 1;
 				case0 = 0;
-				x = 68;	a = 79; b = 63; // niste numere calculate cu precizie pentru a decupa partea necesara a tankului din poza cu ... tankuri . (?)
+				int unghi = angle;
+				if (angle < 0) {
+					unghi = 360 + angle;
+				}
+				std::cout << unghi << std::endl;
 				//Daca pe axa y ne aflam intr-o pozitie cu y > 0 , continuam sa ne deplasam spre origine, altfel nu.
-				if (player.getPosition().y < 0 || obstacleUp(player.getPosition().x, player.getPosition().y))
-					player.move(0, 0);
-				else
-					player.move(0.0, -4.0);
+				if ((player.getPosition().y < 50 && unghi < 180 && unghi > 0)); else
+					if ((unghi > 90 && unghi < 270 && obstacleLeft(player.getPosition().x, player.getPosition().y))); else
+						if (player.getPosition().x < 50 && ((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90))); else
+							if (player.getPosition().x > window.getSize().x - 50 && unghi > 90 && unghi < 270); else
+								if (player.getPosition().y > window.getSize().y - 50 && unghi > 180 && unghi < 360); else
+									if (((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90)) && obstacleRight(player.getPosition().x, player.getPosition().y)); else
+										if (unghi > 0 && unghi < 180 && obstacleUp(player.getPosition().x, player.getPosition().y)); else
+											if (unghi > 180 && unghi < 360 && obstacleDown(player.getPosition().x, player.getPosition().y));else
+					thrust = true;
 			}
 			else
 				if (KeyDown()) {
 					ja = 1;
 					case0 = 1;
-					x = 0;	a = 79; b = 63; // aceleasi numere;
+					int unghi = angle;
+					if (angle < 0) {
+						unghi = 360 + angle;
+					}
+					std::cout << unghi << std::endl;
 					//Daca pe axa y ne afla intr-o pozitie cu y < window.Size().y , continuam sa ne deplasam spre margine, altfel nu.
-					if (player.getPosition().y > window.getSize().y - 70 || obstacleDown(player.getPosition().x, player.getPosition().y))
-						player.move(0, 0);
-					else
-						player.move(0.0, 4.0);
+					if ((player.getPosition().y < 50 && unghi > 180 && unghi < 360)); else
+						if ((((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90)) && obstacleLeft(player.getPosition().x, player.getPosition().y))); else
+							if (player.getPosition().x < 50 && unghi > 90 && unghi < 270); else
+								if (player.getPosition().x > window.getSize().x - 50 && ((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90))); else
+									if (player.getPosition().y > window.getSize().y - 50 && unghi > 0 && unghi < 180); else
+										if (unghi > 90 && unghi < 270 && obstacleRight(player.getPosition().x, player.getPosition().y)); else
+											if (unghi > 180 && unghi < 360 && obstacleUp(player.getPosition().x, player.getPosition().y)); else
+												if (unghi > 0 && unghi < 180 && obstacleDown(player.getPosition().x, player.getPosition().y)); else
+													thrust = true;
 				}
 				else
 					if (KeyLeft()) {
 						ja = 1;
 						case0 = 2;
-						x = 3 * 69.4; a = 78; b = 62;
+						angle -= 3;
+						angle %= 361;
+						//player.rotate(-5);
+						//x = 3 * 69.4; a = 78; b = 62;
 						//Daca pe axa x ne aflam intr-o pozitie cu x > 0 ...sau nu intilnim un obstacol , continuam sa ne deplasam spre origine, altfel nu.
 						if (player.getPosition().x < 0 || obstacleRight(player.getPosition().x, player.getPosition().y))
 							player.move(0, 0);
-						else
-							player.move(-4.0, 0.0);
+						else;
+							//player.move(-4.0, 0.0);
 					}
 					else
 						if (KeyRight()) {
 							ja = 1;
 							case0 = 3;
-							x = 2 * 68; a = 79; b = 63;
+							angle += 3;
+							angle %= 361;
+							//player.rotate(5);
+							//x = 2 * 68; a = 79; b = 63;
 							//Daca pe axa x ne aflam intr-o pozitie cu x < window.getSize().x ...sau nu intilnim un obstacol , continuam sa ne deplasam spre margine, altfel nu.
 							if ((player.getPosition().x >= window.getSize().x - 70) || obstacleLeft(player.getPosition().x, player.getPosition().y))
 								player.move(0, 0);
-							else
-								player.move(4.0, 0.0);
+							else;
+								//player.move(4.0, 0.0);
 						}
 			//
+
+			if (thrust) {
+				dx += cos(angle*DEGTORAD) * 20; //*0.2;
+					dy += sin(angle*DEGTORAD) * 20;//*0.2;
+			}
+
+			int maxSpeed = 2;
+			float speed = sqrt(dx*dx + dy*dy);
+			if (speed > maxSpeed) {
+				dx *= maxSpeed / speed;
+				dy *= maxSpeed / speed;
+			}
+			if(case0 == 0 && thrust)
+				cx -= dx , cy -= dy;
+			if (case0 == 1 && thrust)
+				cx += dx, cy += dy;
+			player.setPosition( cx, cy);
+			player.setRotation(angle + 90);
+			//x += dx;
+			//y += dy;
+
+
+
+			//std::cout << player.getRotation() << std::endl;
 			if (!ja)
 				moving.setVolume(10);
 			else
@@ -363,7 +424,7 @@ void game() {
 								x0 = 2 * 69;
 							}
 							//Decupam bucatile necesare de tank
-							player.setTextureRect(sf::IntRect(x, 0, a, b));
+							//player.setTextureRect(sf::IntRect(x, 0, a, b));
 							if(cs0 == 2)
 							enemy.setTextureRect(sf::IntRect(x0, 0, 78, 63));
 							else
@@ -417,13 +478,14 @@ void game() {
 								timerFirePlayer--;
 							if (timerFireEnemy)
 								timerFireEnemy--;
-							std::cout << timerFirePlayer << std::endl;
+							//std::cout << timerFirePlayer << std::endl;
 						//	if(!timerFirePlayer)
 							check(setted1, setted2, setted3, setted4,timerFirePlayer, eHealth, fire, enemy, window); //trage jucatorul
 						//	if(!timerFireEnemy)
 							check(st1, st2, st3, st4, timerFireEnemy, pHealth, fire1, player, window); // trage inamicul
 							//window.draw(explosion[2]);
 							//adica desenez alea 3 inimi de sus pentru player
+						//	window.draw(bag);
 							if (exp) {
 								if (exp == 50)
 									music.play();

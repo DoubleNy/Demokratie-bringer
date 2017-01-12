@@ -1,9 +1,9 @@
 #include "objects.hpp"
 #include <iostream>
 #include <math.h>
-const int firstLeft = 256;
-const int firstDown = 256;
-const int secondLeft = 460;
+const int firstLeft = 276;
+const int firstDown = 276;
+const int secondLeft = 450;
 const int secondUp = 430;
 bool obstacleLeft(int x, int y){
 	if (x >= firstLeft &&  x <= firstLeft + 20 && y <= firstDown)
@@ -12,22 +12,22 @@ bool obstacleLeft(int x, int y){
 		return(1);
 	return(0);
 }
-const int firstRight = 370; 
-const int secondRight = 560;
+const int firstRight = 420; 
+const int secondRight = 620;
 bool obstacleRight(int x, int y) {
 	if (x <= firstRight && x >= firstRight - 20 && y <= firstDown)
 		return(1);
-	if (x <= secondRight && x >= secondRight - 20 && y >= secondUp)
+	if (x <= secondRight  && x >= secondRight - 20 && y >= secondUp)
 		return(1);
 	return(0);
 }
 bool obstacleUp(int x, int y) {
-	if (x >= firstLeft + 20 && x <= firstLeft + 80 && y <= firstDown + 20)
+	if (x >= firstLeft + 10 && x <= firstLeft + 100 && y <= firstDown + 60)
 		return(1);
 	return(0);
 }
 bool obstacleDown(int x, int y) {
-	if (x >= secondLeft + 10 && x <= secondLeft + 80 && y > secondUp - 20)
+	if (x >= secondLeft + 10 && x <= secondLeft + 100 && y > secondUp)
 		return (1);
 	return(0);
 }

@@ -82,6 +82,6 @@ void check(bool &st1, bool &st2, bool &st3, bool &st4, int  &timer, int &eHealth
 
 
 void make_explosion(sf::RenderWindow &window, sf::Sprite explosion[], int exp) {
-	std::cout << "->" << 25 - (exp / 2) << std::endl;
+	//std::cout << "->" << 25 - (exp / 2) << std::endl;
 	window.draw(explosion[25 - (exp / 2) ]);
 } 
