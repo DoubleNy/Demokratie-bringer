@@ -71,5 +71,8 @@
     <ClInclude Include="AI.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="vars.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

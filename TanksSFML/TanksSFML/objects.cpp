@@ -1,6 +1,8 @@
 #include "objects.hpp"
 #include <iostream>
 #include <math.h>
+
+
 const int firstLeft = 276;
 const int firstDown = 276;
 const int secondLeft = 450;
@@ -35,4 +37,8 @@ bool intersect(int x0, int y0, int r0, int x1, int y1, int r1) {
 	if(sqrt((x0 - x1) * (x0 - x1) + (y0 - y1) * (y0 - y1)) <= r0 + r1)
 		return(1);
 	return(0);
+}
+
+void loadExplosion(sf::Sprite explosion[]) {
+
 }

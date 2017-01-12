@@ -11,9 +11,11 @@
 #include "AI.hpp"
 #include "getStart.hpp"
 #include "SFML\Audio.hpp"
+#include "vars.hpp"
 int choosedTank = 0;
-float DEGTORAD = 0.017453f;
 //using namespace std;
+float DEGTORAD = 0.017453f;
+
 void game() {
 	srand(time(NULL));
 	sf::Music music;
@@ -33,107 +35,108 @@ void game() {
 	sf::RectangleShape fire(sf::Vector2f(20, 20)); // foc 
 	sf::RectangleShape fire1(sf::Vector2f(20, 20));
 	sf::Sprite explosion[26];
-	if (1) {
-		sf::Texture txt1;
-		txt1.loadFromFile("1.png");
-		explosion[1].setTexture(txt1);
+	//if (1) {
+	sf::Texture txt1;
+	txt1.loadFromFile("1.png");
+	explosion[1].setTexture(txt1);
 
-		sf::Texture txt2;
-		txt2.loadFromFile("2.png");
-		explosion[2].setTexture(txt2);
+	sf::Texture txt2;
+	txt2.loadFromFile("2.png");
+	explosion[2].setTexture(txt2);
 
-		sf::Texture txt3;
-		txt3.loadFromFile("3.png");
-		explosion[3].setTexture(txt3);
+	sf::Texture txt3;
+	txt3.loadFromFile("3.png");
+	explosion[3].setTexture(txt3);
 
-		sf::Texture txt4;
-		txt4.loadFromFile("4.png");
-		explosion[4].setTexture(txt4);
+	sf::Texture txt4;
+	txt4.loadFromFile("4.png");
+	explosion[4].setTexture(txt4);
 
-		sf::Texture txt5;
-		txt5.loadFromFile("5.png");
-		explosion[5].setTexture(txt5);
+	sf::Texture txt5;
+	txt5.loadFromFile("5.png");
+	explosion[5].setTexture(txt5);
 
-		sf::Texture txt6;
-		txt6.loadFromFile("6.png");
-		explosion[6].setTexture(txt6);
+	sf::Texture txt6;
+	txt6.loadFromFile("6.png");
+	explosion[6].setTexture(txt6);
 
-		sf::Texture txt7;
-		txt7.loadFromFile("7.png");
-		explosion[7].setTexture(txt7);
+	sf::Texture txt7;
+	txt7.loadFromFile("7.png");
+	explosion[7].setTexture(txt7);
 
-		sf::Texture txt8;
-		txt8.loadFromFile("8.png");
-		explosion[8].setTexture(txt8);
+	sf::Texture txt8;
+	txt8.loadFromFile("8.png");
+	explosion[8].setTexture(txt8);
 
-		sf::Texture txt9;
-		txt9.loadFromFile("9.png");
-		explosion[9].setTexture(txt9);
+	sf::Texture txt9;
+	txt9.loadFromFile("9.png");
+	explosion[9].setTexture(txt9);
 
-		sf::Texture txt10;
-		txt10.loadFromFile("10.png");
-		explosion[10].setTexture(txt10);
+	sf::Texture txt10;
+	txt10.loadFromFile("10.png");
+	explosion[10].setTexture(txt10);
 
-		sf::Texture txt11;
-		txt11.loadFromFile("11.png");
-		explosion[11].setTexture(txt11);
+	sf::Texture txt11;
+	txt11.loadFromFile("11.png");
+	explosion[11].setTexture(txt11);
 
-		sf::Texture txt12;
-		txt12.loadFromFile("12.png");
-		explosion[12].setTexture(txt12);
+	sf::Texture txt12;
+	txt12.loadFromFile("12.png");
+	explosion[12].setTexture(txt12);
 
-		sf::Texture txt13;
-		txt13.loadFromFile("13.png");
-		explosion[13].setTexture(txt13);
+	sf::Texture txt13;
+	txt13.loadFromFile("13.png");
+	explosion[13].setTexture(txt13);
 
-		sf::Texture txt14;
-		txt14.loadFromFile("14.png");
-		explosion[14].setTexture(txt14);
+	sf::Texture txt14;
+	txt14.loadFromFile("14.png");
+	explosion[14].setTexture(txt14);
 
-		sf::Texture txt15;
-		txt15.loadFromFile("15.png");
-		explosion[15].setTexture(txt15);
+	sf::Texture txt15;
+	txt15.loadFromFile("15.png");
+	explosion[15].setTexture(txt15);
 
-		sf::Texture txt16;
-		txt16.loadFromFile("16.png");
-		explosion[16].setTexture(txt16);
+	sf::Texture txt16;
+	txt16.loadFromFile("16.png");
+	explosion[16].setTexture(txt16);
 
-		sf::Texture txt17;
-		txt17.loadFromFile("17.png");
-		explosion[17].setTexture(txt17);
+	sf::Texture txt17;
+	txt17.loadFromFile("17.png");
+	explosion[17].setTexture(txt17);
 
-		sf::Texture txt18;
-		txt18.loadFromFile("18.png");
-		explosion[18].setTexture(txt18);
+	sf::Texture txt18;
+	txt18.loadFromFile("18.png");
+	explosion[18].setTexture(txt18);
 
-		sf::Texture txt19;
-		txt19.loadFromFile("19.png");
-		explosion[19].setTexture(txt19);
+	sf::Texture txt19;
+	txt19.loadFromFile("19.png");
+	explosion[19].setTexture(txt19);
 
-		sf::Texture txt20;
-		txt20.loadFromFile("20.png");
-		explosion[20].setTexture(txt20);
+	sf::Texture txt20;
+	txt20.loadFromFile("20.png");
+	explosion[20].setTexture(txt20);
 
-		sf::Texture txt21;
-		txt21.loadFromFile("21.png");
-		explosion[21].setTexture(txt21);
+	sf::Texture txt21;
+	txt21.loadFromFile("21.png");
+	explosion[21].setTexture(txt21);
 
-		sf::Texture txt22;
-		txt22.loadFromFile("22.png");
-		explosion[22].setTexture(txt22);
+	sf::Texture txt22;
+	txt22.loadFromFile("22.png");
+	explosion[22].setTexture(txt22);
 
-		sf::Texture txt23;
-		txt23.loadFromFile("23.png");
-		explosion[23].setTexture(txt23);
+	sf::Texture txt23;
+	txt23.loadFromFile("23.png");
+	explosion[23].setTexture(txt23);
 
-		sf::Texture txt24;
-		txt24.loadFromFile("24.png");
-		explosion[24].setTexture(txt24);
+	sf::Texture txt24;
+	txt24.loadFromFile("24.png");
+	explosion[24].setTexture(txt24);
 
-		sf::Texture txt25;
-		txt25.loadFromFile("25.png");
-		explosion[25].setTexture(txt25);
-	}
+	sf::Texture txt25;
+	txt25.loadFromFile("25.png");
+	explosion[25].setTexture(txt25);
+	//loadExplosion(explosion);
+	//}
 	player.setPosition(30, 30); // setare pozitie de start pentru jucator
 	enemy.setPosition(860, 600); // setare pozitie de start pentru inamic
 	details.setPosition(sf::Vector2i(500, 50)); // setare pozitie pentru fereastra details.
@@ -147,7 +150,19 @@ void game() {
 		sf::Texture tnk1;
 		tnk1.loadFromFile("tank1.png");
 		player.setTexture(&tnk1);
+		
+		sf::Texture tnk2;
+		tnk2.loadFromFile("tank2.png");
+
+		sf::Texture tnk3;
+		tnk3.loadFromFile("tank3.png");
+		
 	//}
+		if (choosedTank == 1)
+			player.setTexture(&tnk2);
+		if (choosedTank == 2)
+			player.setTexture(&tnk3);
+
 	texture.loadFromFile("tank.png");
 	enemy.setTexture(&texture);
 
@@ -240,34 +255,10 @@ void game() {
    }
 	player.setOrigin(80 / 2, 60 / 2);
 	window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
-		bool isMoving = 1;
-		int cnt = 0;
-		int pHealth = 100;
-		int eHealth = 100;
-		int nextMove = 1;
-		int x = 0;
-		int a = 79;
-		int b = 63;
-		int x0 = 70;
 		int exp = 0;
-		int playerLifes = 3;
-		int enemyLifes = 3;
-		int case0 = 0, cs0 = 0, ja = 0;
-		bool  setted1 = 0, st1 = 0;
-		bool  setted2 = 0, st2 = 0;
-		bool  setted3 = 0, st3 = 0;
-		bool  setted4 = 0, st4 = 0;
-		int timerFirePlayer = 0;
-		int timerFireEnemy = 0;
 		std::string str;
-		int fp;
-		int ripPlayer = 0;
 		sf::Clock clock;
 		sf::Time time;
-		bool thrust = 0;
-		int angle = -90;
-		float cx = 30, cy = 30;
-		float dx = 0, dy = 0;
 	window.setFramerateLimit(30);//fixare limita fps		
 	//Loop-ul principal;
 	moving.setLoop(1);
@@ -359,7 +350,7 @@ void game() {
 			//
 
 			if (thrust) {
-				dx += cos(angle*DEGTORAD) * 20; //*0.2;
+					dx += cos(angle*DEGTORAD) * 20; //*0.2;
 					dy += sin(angle*DEGTORAD) * 20;//*0.2;
 			}
 
@@ -396,7 +387,7 @@ void game() {
 					enemy.move(0, 0);
 				else {
 					cs0 = 0;
-					enemy.move(0.0, -4.0);
+					enemy.move(0.0, -2.0);
 					x0 = 70;
 				}
 				if (nextMove == 2) // 2 == DOWN
@@ -404,7 +395,7 @@ void game() {
 						enemy.move(0, 0);
 					else {
 						cs0 = 1;
-						enemy.move(0.0, 4.0);
+						enemy.move(0.0, 2.0);
 						x0 = 0;
 					}
 					if (nextMove == 3) // 3 == LEFT
@@ -412,7 +403,7 @@ void game() {
 							enemy.move(0, 0);
 						else {
 							cs0 = 2;
-							enemy.move(-4, 0);
+							enemy.move(-2, 0);
 							x0 = 3 * 70;
 						}
 						if (nextMove == 4) // 4 == GUESS
@@ -420,7 +411,7 @@ void game() {
 								enemy.move(0, 0);
 							else {
 								cs0 = 3;
-								enemy.move(4, 0);
+								enemy.move(2, 0);
 								x0 = 2 * 69;
 							}
 							//Decupam bucatile necesare de tank
@@ -441,7 +432,8 @@ void game() {
 								if (pressed && !setted1 && !setted2 && !setted3 && !setted4) {
 									shot.setVolume(60);
 									shot.play();
-									attack(fire, player, enemy, case0, timerFirePlayer);
+									attack(fire, player, enemy, angle, timerFirePlayer, cx, cy, dx, dy);
+									ung = angle;
 									if (case0 == 0 && !setted2 && !setted3 && !setted4)
 										setted1 = 1;
 									if (case0 == 1 && !setted1 && !setted3 && !setted4)
@@ -455,7 +447,7 @@ void game() {
 							//
 							if (!exp && !timerFireEnemy)
 								if (!st1 && !st2 && !st3 && !st4) {
-									attack(fire1, enemy, player, cs0, timerFireEnemy);
+									attack(fire1, enemy, player, cs0, timerFireEnemy, cx, cy, dx, dy);
 									if (cs0 == 0 && !st2 && !st3 && !st4)
 										st1 = 1;
 									if (cs0 == 1 && !st1 && !st3 && !st4)
@@ -480,9 +472,9 @@ void game() {
 								timerFireEnemy--;
 							//std::cout << timerFirePlayer << std::endl;
 						//	if(!timerFirePlayer)
-							check(setted1, setted2, setted3, setted4,timerFirePlayer, eHealth, fire, enemy, window); //trage jucatorul
+							check(setted1, setted2, setted3, setted4,timerFirePlayer, eHealth, fire, enemy, window, dx ,dy, ung); //trage jucatorul
 						//	if(!timerFireEnemy)
-							check(st1, st2, st3, st4, timerFireEnemy, pHealth, fire1, player, window); // trage inamicul
+							check(st1, st2, st3, st4, timerFireEnemy, pHealth, fire1, player, window, dx, dy, angle); // trage inamicul
 							//window.draw(explosion[2]);
 							//adica desenez alea 3 inimi de sus pentru player
 						//	window.draw(bag);
@@ -769,7 +761,7 @@ void game() {
 											 //de aici pana "acolo" e o chestie legata de proiectilul player-ului
 							if (!ripPlayer && !timerFirePlayer)
 								if (pressed && !setted1 && !setted2 && !setted3 && !setted4) {
-									attack(fire, player, enemy, case0, timerFirePlayer);
+									attack(fire, player, enemy, case0, timerFirePlayer, cx, cy, dx, dy);
 									if (case0 == 0 && !setted2 && !setted3 && !setted4)
 										setted1 = 1;
 									if (case0 == 1 && !setted1 && !setted3 && !setted4)
@@ -783,7 +775,7 @@ void game() {
 							//
 							if (!exp && !timerFireEnemy)
 								if (!st1 && !st2 && !st3 && !st4) {
-									attack(fire1, enemy, player, cs0, timerFireEnemy);
+									attack(fire1, enemy, player, cs0, timerFireEnemy, cx, cy, dx, dy);
 									if (cs0 == 0 && !st2 && !st3 && !st4)
 										st1 = 1;
 									if (cs0 == 1 && !st1 && !st3 && !st4)
@@ -800,8 +792,8 @@ void game() {
 							if (!exp)
 								window.draw(enemy);
 							window.draw(player); // desenam jucatorul
-							check(setted1, setted2, setted3, setted4,timerFirePlayer, eHealth, fire, enemy, window); //trage jucatorul
-							check(st1, st2, st3, st4, timerFireEnemy, pHealth, fire1, player, window); // trage inamicul
+							check(setted1, setted2, setted3, setted4,timerFirePlayer, eHealth, fire, enemy, window, dx, dy,  angle); //trage jucatorul
+							check(st1, st2, st3, st4, timerFireEnemy, pHealth, fire1, player, window, dx, dy,  angle); // trage inamicul
 
 																					   //adica desenez alea 3 inimi de sus pentru player
 							if (playerLifes == 3) {

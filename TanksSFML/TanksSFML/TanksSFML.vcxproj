@@ -182,6 +182,7 @@
     <ClInclude Include="menu.h" />
     <ClInclude Include="objects.hpp" />
     <ClInclude Include="tile.h" />
+    <ClInclude Include="vars.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
