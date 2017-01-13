@@ -3,10 +3,10 @@
 #include <math.h>
 
 
-const int firstLeft = 276;
-const int firstDown = 276;
-const int secondLeft = 450;
-const int secondUp = 430;
+int firstLeft = 276;
+ int firstDown = 276;
+ int secondLeft = 450;
+ int secondUp = 430;
 bool obstacleLeft(int x, int y){
 	if (x >= firstLeft &&  x <= firstLeft + 20 && y <= firstDown)
 		return(1);
@@ -14,8 +14,8 @@ bool obstacleLeft(int x, int y){
 		return(1);
 	return(0);
 }
-const int firstRight = 420; 
-const int secondRight = 620;
+ int firstRight = 420; 
+ int secondRight = 620;
 bool obstacleRight(int x, int y) {
 	if (x <= firstRight && x >= firstRight - 20 && y <= firstDown)
 		return(1);
@@ -42,3 +42,4 @@ bool intersect(int x0, int y0, int r0, int x1, int y1, int r1) {
 void loadExplosion(sf::Sprite explosion[]) {
 
 }
+

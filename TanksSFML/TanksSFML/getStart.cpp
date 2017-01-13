@@ -3,6 +3,7 @@
 #include "menu.h"
 #include <algorithm>    // std::max
 int choosedMap;
+bool multiplayer = 0;
 
 int start() {
 	sf::Music switchEffect;
@@ -170,7 +171,56 @@ int start() {
 																								break;
 																							case 1:
 																								std::cout << "Game Mode" << std::endl;
-																								
+																								//
+																								while (window.isOpen()) {
+																									sf::Event event;
+																									while (window.pollEvent(event)) {
+																										switch (event.type) {
+																										case sf::Event::KeyReleased:
+																											switch (event.key.code) {
+																											case sf::Keyboard::Up:
+																												if (CHmenu != 0)
+																													switchEffect.play();
+																												CHmenu = std::max(0, CHmenu - 1);
+																												meniu.MoveUp(3);
+																												break;
+																											case sf::Keyboard::Down:
+																												if (CHmenu != 2)
+																													switchEffect.play();
+																												CHmenu = std::min(2, CHmenu + 1);
+																												meniu.MoveDown(3);
+																												break;
+																											case sf::Keyboard::Return:
+																												switch (meniu.GetPressedItem4()) {
+																												case 0:
+																													std::cout << "Multiplayer" << std::endl;
+																													multiplayer = 1;
+																													break;
+																												case 1:
+																													std::cout << "Computer" << std::endl;
+																													multiplayer = 0;
+																													break;
+																												case 2:
+																													std::cout << "Back" << std::endl;
+																													//window.close();
+																													goto down1;
+																													break;
+																												}
+																												break;
+																											}//sqitch(event.key)
+																											break;
+																										case sf::Event::Closed:
+																											window.close();
+																											break;
+																										} // switch(event.type)
+																									} // while(pollEvent)
+																									window.clear();
+																									window.draw(wallpaper);
+																									meniu.draw(3, window, lang);
+																									window.display();
+																								}
+																								//
+																								down1:
 																								break;
 																							case 2:
 																								std::cout << "Back" << std::endl;

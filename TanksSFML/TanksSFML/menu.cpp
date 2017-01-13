@@ -62,9 +62,28 @@ Menu::Menu(float width, float height){
 	options[2].setCharacterSize(100);
 	options[2].setPosition(sf::Vector2f(360, 400));
 
+	mode[0].setFont(font);
+	mode[0].setFillColor(sf::Color::Black);
+	mode[0].setString("Multiplayer");
+	mode[0].setCharacterSize(100);
+	mode[0].setPosition(sf::Vector2f(200, 100));
+
+	mode[1].setFont(font);
+	mode[1].setFillColor(sf::Color::White);
+	mode[1].setString("Single");
+	mode[1].setCharacterSize(100);
+	mode[1].setPosition(sf::Vector2f(300, 250));
+
+	mode[2].setFont(font);
+	mode[2].setFillColor(sf::Color::White);
+	mode[2].setString("Back");
+	mode[2].setCharacterSize(100);
+	mode[2].setPosition(sf::Vector2f(350, 400));
+
 	selectedItemIndex = 0;
 	selectedItemIndex2 = 0;
 	selectedItemIndex3 = 0;
+	selectedItemIndex4 = 0;
 }
 Menu::~Menu(){
 }
@@ -92,6 +111,8 @@ void Menu::draw(int nbr, sf::RenderWindow &window, int language){
 			window.draw(play[i]);
 		if (nbr == 2)
 			window.draw(options[i]);
+		if(nbr == 3)
+			window.draw(mode[i]);
 	}
 }
 
@@ -116,6 +137,13 @@ void Menu::MoveUp(int nbr){
 			options[selectedItemIndex3].setFillColor(sf::Color::Black);
 		}
 	}
+	if (nbr == 3) {
+		if (selectedItemIndex4 - 1 >= 0) {
+			mode[selectedItemIndex4].setFillColor(sf::Color::White);
+			selectedItemIndex4--;
+			mode[selectedItemIndex4].setFillColor(sf::Color::Black);
+		}
+	}
 }
 
 void Menu::MoveDown(int nbr){
@@ -137,6 +165,13 @@ void Menu::MoveDown(int nbr){
 			options[selectedItemIndex3].setFillColor(sf::Color::White);
 			selectedItemIndex3++;
 			options[selectedItemIndex3].setFillColor(sf::Color::Black);
+		}
+	}
+	if (nbr == 3) {
+		if (selectedItemIndex4 + 1 < MAX_NUMBER_OF_ITEMS) {
+			mode[selectedItemIndex4].setFillColor(sf::Color::White);
+			selectedItemIndex4++;
+			mode[selectedItemIndex4].setFillColor(sf::Color::Black);
 		}
 	}
 }

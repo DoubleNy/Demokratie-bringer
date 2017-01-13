@@ -5,4 +5,5 @@
 #include "game.h"
 #include <time.h>
 extern int choosedMap;
+extern bool multiplayer;
 int start();

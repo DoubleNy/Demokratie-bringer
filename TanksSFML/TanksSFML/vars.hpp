@@ -20,10 +20,14 @@ bool  setted4 = 0, st4 = 0;
 int timerFirePlayer = 0;
 int timerFireEnemy = 0;
 bool thrust = 0;
+bool Ethrust = 0;
 int angle = -90;
-float cx = 30, cy = 30;
-float dx = 0, dy = 0;
+int  ja2 = 0;
+int Eangle = 180;
+float cx = 30, cy = 30, Ecx = 830, Ecy = 620;
+float dx = 0, dy = 0, Edx = 0, Edy = 0;
 int ung;
+int ung2=180;
 int fp;
 int ripPlayer = 0;
 #endif

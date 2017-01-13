@@ -13,10 +13,11 @@ void attack( sf::RectangleShape &fire, sf::RectangleShape player, sf::RectangleS
 		if (angle < 0) {
 			unghi = 360 + angle;
 		}
-		std::cout << unghi << std::endl;
+		//std::cout << unghi << std::endl;
 		//if(unghi > 270 && unghi < 360)
 			//fire.setPosition(player.getPosition().x - cos(angle*pp) * 60, player.getPosition().y - sin(angle*pp) * 40);
 		//else
+
 		if(unghi > 60 && unghi < 180)
 			fire.setPosition(player.getPosition().x - cos(angle*pp) - 10 , player.getPosition().y - sin(angle*pp));
 		else
@@ -89,7 +90,7 @@ void check(bool &st1, bool &st2, bool &st3, bool &st4, int  &timer, int &eHealth
 					(fire.getPosition().y > window.getSize().y - 50 && unghi > 180 && unghi < 360) ||
 					(((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90)) && obstacleRight(fire.getPosition().x, fire.getPosition().y)) ||
 					(unghi > 0 && unghi < 180 && obstacleUp(fire.getPosition().x, fire.getPosition().y)) ||
-					(unghi > 180 && unghi < 360 && obstacleDown(fire.getPosition().x, fire.getPosition().y))|| (intersect(enemy.getPosition().x, enemy.getPosition().y, 25, fire.getPosition().x, fire.getPosition().y, 20))) {
+					(unghi > 180 && unghi < 360 && obstacleDown(fire.getPosition().x, fire.getPosition().y))|| (fire.getPosition().x < 10) || (intersect(enemy.getPosition().x, enemy.getPosition().y, 25, fire.getPosition().x, fire.getPosition().y, 20))) {
 					st3 = 0;
 					if (intersect(enemy.getPosition().x, enemy.getPosition().y, 20, fire.getPosition().x, fire.getPosition().y, 20))
 						eHealth -= 10;
