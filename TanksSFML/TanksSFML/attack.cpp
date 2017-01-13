@@ -41,29 +41,30 @@ void check(bool &st1, bool &st2, bool &st3, bool &st4, int  &timer, int &eHealth
 		//fire.move(0, -15);
 		window.draw(fire);
 		if (((fire.getPosition().y < 50 && unghi < 180 && unghi > 0)) ||
-		 ((unghi > 90 && unghi < 270 && obstacleLeft(mpcur, fire.getPosition().x, fire.getPosition().y))) ||
+		 ((unghi > 90 && unghi < 270 && obstacleLeft(mpcur, fire.getPosition().x, fire.getPosition().y, choosedMap))) ||
 				 (fire.getPosition().x < 50 && ((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90))) ||
 					 (fire.getPosition().x > window.getSize().x - 50 && unghi > 90 && unghi < 270) ||
 						 (fire.getPosition().y > window.getSize().y - 50 && unghi > 180 && unghi < 360) ||
-							 (((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90)) && obstacleRight(mpcur, fire.getPosition().x, fire.getPosition().y)) ||
-								 (unghi > 0 && unghi < 180 && obstacleUp(mpcur, fire.getPosition().x, fire.getPosition().y)) ||
-									 (unghi > 180 && unghi < 360 && obstacleDown(mpcur, fire.getPosition().x, fire.getPosition().y)) || (intersect(enemy.getPosition().x, enemy.getPosition().y, 40, fire.getPosition().x, fire.getPosition().y, 20))) {
+							 (((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90)) && obstacleRight(mpcur, fire.getPosition().x, fire.getPosition().y, choosedMap)) ||
+								 (unghi > 0 && unghi < 180 && obstacleUp(mpcur, fire.getPosition().x, fire.getPosition().y, choosedMap)) ||
+									 (unghi > 180 && unghi < 360 && obstacleDown(mpcur, fire.getPosition().x, fire.getPosition().y, choosedMap)) || (intersect(enemy.getPosition().x, enemy.getPosition().y, 40, fire.getPosition().x, fire.getPosition().y, 20))) {
 			st1 = 0;
 			if (intersect(enemy.getPosition().x, enemy.getPosition().y, 40, fire.getPosition().x, fire.getPosition().y, 20))
 				eHealth -= 1;
 			if (eHealth < 0)
 				eHealth = 0;
 		}
-		if (seHealth > 1) {
+		std::cout << "111->>>>>>>" << seHealth << std::endl;
+		if (seHealth >= 1) {
 
 			if (((fire.getPosition().y < 50 && unghi < 180 && unghi > 0)) ||
-				((unghi > 90 && unghi < 270 && obstacleLeft(mpcur, fire.getPosition().x, fire.getPosition().y))) ||
+				((unghi > 90 && unghi < 270 && obstacleLeft(mpcur, fire.getPosition().x, fire.getPosition().y, choosedMap))) ||
 				(fire.getPosition().x < 50 && ((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90))) ||
 				(fire.getPosition().x > window.getSize().x - 50 && unghi > 90 && unghi < 270) ||
 				(fire.getPosition().y > window.getSize().y - 50 && unghi > 180 && unghi < 360) ||
-				(((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90)) && obstacleRight(mpcur, fire.getPosition().x, fire.getPosition().y)) ||
-				(unghi > 0 && unghi < 180 && obstacleUp(mpcur, fire.getPosition().x, fire.getPosition().y)) ||
-				(unghi > 180 && unghi < 360 && obstacleDown(mpcur, fire.getPosition().x, fire.getPosition().y)) || (intersect(enemyTwo.getPosition().x, enemyTwo.getPosition().y, 40, fire.getPosition().x, fire.getPosition().y, 20))) {
+				(((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90)) && obstacleRight(mpcur, fire.getPosition().x, fire.getPosition().y, choosedMap)) ||
+				(unghi > 0 && unghi < 180 && obstacleUp(mpcur, fire.getPosition().x, fire.getPosition().y, choosedMap)) ||
+				(unghi > 180 && unghi < 360 && obstacleDown(mpcur, fire.getPosition().x, fire.getPosition().y, choosedMap)) || (intersect(enemyTwo.getPosition().x, enemyTwo.getPosition().y, 40, fire.getPosition().x, fire.getPosition().y, 20))) {
 				st1 = 0;
 				if (intersect(enemyTwo.getPosition().x, enemyTwo.getPosition().y, 40, fire.getPosition().x, fire.getPosition().y, 20))
 					seHealth -= 1;
@@ -79,29 +80,29 @@ void check(bool &st1, bool &st2, bool &st3, bool &st4, int  &timer, int &eHealth
 			fire.setPosition(fire.getPosition().x - cos(angle*pp) * 10, fire.getPosition().y - sin(angle*pp) * 10);
 			window.draw(fire);
 			if (((fire.getPosition().y < 50 && unghi < 180 && unghi > 0)) ||
-				((unghi > 90 && unghi < 270 && obstacleLeft(mpcur,fire.getPosition().x, fire.getPosition().y))) ||
+				((unghi > 90 && unghi < 270 && obstacleLeft(mpcur,fire.getPosition().x, fire.getPosition().y, choosedMap))) ||
 				(fire.getPosition().x < 50 && ((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90))) ||
 				(fire.getPosition().x > window.getSize().x - 50 && unghi > 90 && unghi < 270) ||
 				(fire.getPosition().y > window.getSize().y - 50 && unghi > 180 && unghi < 360) ||
-				(((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90)) && obstacleRight(mpcur,fire.getPosition().x, fire.getPosition().y)) ||
-				(unghi > 0 && unghi < 180 && obstacleUp(mpcur,fire.getPosition().x, fire.getPosition().y)) ||
-				(unghi > 180 && unghi < 360 && obstacleDown(mpcur,fire.getPosition().x, fire.getPosition().y))|| (intersect(enemy.getPosition().x, enemy.getPosition().y, 40, fire.getPosition().x, fire.getPosition().y, 20))) {
+				(((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90)) && obstacleRight(mpcur,fire.getPosition().x, fire.getPosition().y, choosedMap)) ||
+				(unghi > 0 && unghi < 180 && obstacleUp(mpcur,fire.getPosition().x, fire.getPosition().y, choosedMap)) ||
+				(unghi > 180 && unghi < 360 && obstacleDown(mpcur,fire.getPosition().x, fire.getPosition().y, choosedMap))|| (intersect(enemy.getPosition().x, enemy.getPosition().y, 40, fire.getPosition().x, fire.getPosition().y, 20))) {
 				st2 = 0;
 				if (intersect(enemy.getPosition().x, enemy.getPosition().y, 40, fire.getPosition().x, fire.getPosition().y, 20))
 					eHealth -= 1;
 				if (eHealth < 0)
 					eHealth = 0;
 			}
-			if (seHealth > 1) {
+			if (seHealth >= 1) {
 
 				if (((fire.getPosition().y < 50 && unghi < 180 && unghi > 0)) ||
-					((unghi > 90 && unghi < 270 && obstacleLeft(mpcur, fire.getPosition().x, fire.getPosition().y))) ||
+					((unghi > 90 && unghi < 270 && obstacleLeft(mpcur, fire.getPosition().x, fire.getPosition().y, choosedMap))) ||
 					(fire.getPosition().x < 50 && ((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90))) ||
 					(fire.getPosition().x > window.getSize().x - 50 && unghi > 90 && unghi < 270) ||
 					(fire.getPosition().y > window.getSize().y - 50 && unghi > 180 && unghi < 360) ||
-					(((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90)) && obstacleRight(mpcur, fire.getPosition().x, fire.getPosition().y)) ||
-					(unghi > 0 && unghi < 180 && obstacleUp(mpcur, fire.getPosition().x, fire.getPosition().y)) ||
-					(unghi > 180 && unghi < 360 && obstacleDown(mpcur, fire.getPosition().x, fire.getPosition().y)) || (intersect(enemyTwo.getPosition().x, enemyTwo.getPosition().y, 40, fire.getPosition().x, fire.getPosition().y, 20))) {
+					(((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90)) && obstacleRight(mpcur, fire.getPosition().x, fire.getPosition().y, choosedMap)) ||
+					(unghi > 0 && unghi < 180 && obstacleUp(mpcur, fire.getPosition().x, fire.getPosition().y, choosedMap)) ||
+					(unghi > 180 && unghi < 360 && obstacleDown(mpcur, fire.getPosition().x, fire.getPosition().y, choosedMap)) || (intersect(enemyTwo.getPosition().x, enemyTwo.getPosition().y, 40, fire.getPosition().x, fire.getPosition().y, 20))) {
 					st1 = 0;
 					if (intersect(enemyTwo.getPosition().x, enemyTwo.getPosition().y, 40, fire.getPosition().x, fire.getPosition().y, 20))
 						seHealth -= 1;
@@ -117,29 +118,29 @@ void check(bool &st1, bool &st2, bool &st3, bool &st4, int  &timer, int &eHealth
 				fire.setPosition(fire.getPosition().x - cos(angle*pp) * 10, fire.getPosition().y - sin(angle*pp) * 10);
 				window.draw(fire);
 				if (((fire.getPosition().y < 50 && unghi < 180 && unghi > 0)) ||
-					((unghi > 90 && unghi < 270 && obstacleLeft(mpcur,fire.getPosition().x, fire.getPosition().y))) ||
+					((unghi > 90 && unghi < 270 && obstacleLeft(mpcur,fire.getPosition().x, fire.getPosition().y, choosedMap))) ||
 					(fire.getPosition().x < 50 && ((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90))) ||
 					(fire.getPosition().x > window.getSize().x - 50 && unghi > 90 && unghi < 270) ||
 					(fire.getPosition().y > window.getSize().y - 50 && unghi > 180 && unghi < 360) ||
-					(((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90)) && obstacleRight(mpcur,fire.getPosition().x, fire.getPosition().y)) ||
-					(unghi > 0 && unghi < 180 && obstacleUp(mpcur,fire.getPosition().x, fire.getPosition().y)) ||
-					(unghi > 180 && unghi < 360 && obstacleDown(mpcur,fire.getPosition().x, fire.getPosition().y))|| (fire.getPosition().x < 10) || (intersect(enemy.getPosition().x, enemy.getPosition().y, 40, fire.getPosition().x, fire.getPosition().y, 20))) {
+					(((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90)) && obstacleRight(mpcur,fire.getPosition().x, fire.getPosition().y, choosedMap)) ||
+					(unghi > 0 && unghi < 180 && obstacleUp(mpcur,fire.getPosition().x, fire.getPosition().y, choosedMap)) ||
+					(unghi > 180 && unghi < 360 && obstacleDown(mpcur,fire.getPosition().x, fire.getPosition().y, choosedMap))|| (fire.getPosition().x < 10) || (intersect(enemy.getPosition().x, enemy.getPosition().y, 40, fire.getPosition().x, fire.getPosition().y, 20))) {
 					st3 = 0;
 					if (intersect(enemy.getPosition().x, enemy.getPosition().y, 40, fire.getPosition().x, fire.getPosition().y, 20))
 						eHealth -= 1;
 					if (eHealth < 0)
 						eHealth = 0;
 				}
-				if (seHealth > 1) {
+				if (seHealth >=1) {
 
 					if (((fire.getPosition().y < 50 && unghi < 180 && unghi > 0)) ||
-						((unghi > 90 && unghi < 270 && obstacleLeft(mpcur, fire.getPosition().x, fire.getPosition().y))) ||
+						((unghi > 90 && unghi < 270 && obstacleLeft(mpcur, fire.getPosition().x, fire.getPosition().y, choosedMap))) ||
 						(fire.getPosition().x < 50 && ((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90))) ||
 						(fire.getPosition().x > window.getSize().x - 50 && unghi > 90 && unghi < 270) ||
 						(fire.getPosition().y > window.getSize().y - 50 && unghi > 180 && unghi < 360) ||
-						(((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90)) && obstacleRight(mpcur, fire.getPosition().x, fire.getPosition().y)) ||
-						(unghi > 0 && unghi < 180 && obstacleUp(mpcur, fire.getPosition().x, fire.getPosition().y)) ||
-						(unghi > 180 && unghi < 360 && obstacleDown(mpcur, fire.getPosition().x, fire.getPosition().y)) || (intersect(enemyTwo.getPosition().x, enemyTwo.getPosition().y, 40, fire.getPosition().x, fire.getPosition().y, 20))) {
+						(((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90)) && obstacleRight(mpcur, fire.getPosition().x, fire.getPosition().y, choosedMap)) ||
+						(unghi > 0 && unghi < 180 && obstacleUp(mpcur, fire.getPosition().x, fire.getPosition().y, choosedMap)) ||
+						(unghi > 180 && unghi < 360 && obstacleDown(mpcur, fire.getPosition().x, fire.getPosition().y, choosedMap)) || (intersect(enemyTwo.getPosition().x, enemyTwo.getPosition().y, 40, fire.getPosition().x, fire.getPosition().y, 20))) {
 						st1 = 0;
 						if (intersect(enemyTwo.getPosition().x, enemyTwo.getPosition().y, 40, fire.getPosition().x, fire.getPosition().y, 20))
 							seHealth -= 1;
@@ -155,13 +156,13 @@ void check(bool &st1, bool &st2, bool &st3, bool &st4, int  &timer, int &eHealth
 					fire.setPosition(fire.getPosition().x - cos(angle*pp) * 10, fire.getPosition().y - sin(angle*pp) * 10);
 					window.draw(fire);
 					if (((fire.getPosition().y < 50 && unghi < 180 && unghi > 0)) ||
-						((unghi > 90 && unghi < 270 && obstacleLeft(mpcur,fire.getPosition().x, fire.getPosition().y))) ||
+						((unghi > 90 && unghi < 270 && obstacleLeft(mpcur,fire.getPosition().x, fire.getPosition().y, choosedMap))) ||
 						(fire.getPosition().x < 50 && ((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90))) ||
 						(fire.getPosition().x > window.getSize().x - 50 && unghi > 90 && unghi < 270) ||
 						(fire.getPosition().y > window.getSize().y - 50 && unghi > 180 && unghi < 360) ||
-						(((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90)) && obstacleRight(mpcur,fire.getPosition().x, fire.getPosition().y)) ||
-						(unghi > 0 && unghi < 180 && obstacleUp(mpcur,fire.getPosition().x, fire.getPosition().y)) ||
-						(unghi > 180 && unghi < 360 && obstacleDown(mpcur,fire.getPosition().x, fire.getPosition().y))|| (intersect(enemy.getPosition().x, enemy.getPosition().y, 40, fire.getPosition().x, fire.getPosition().y, 20))) {
+						(((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90)) && obstacleRight(mpcur,fire.getPosition().x, fire.getPosition().y, choosedMap)) ||
+						(unghi > 0 && unghi < 180 && obstacleUp(mpcur,fire.getPosition().x, fire.getPosition().y, choosedMap)) ||
+						(unghi > 180 && unghi < 360 && obstacleDown(mpcur,fire.getPosition().x, fire.getPosition().y, choosedMap))|| (intersect(enemy.getPosition().x, enemy.getPosition().y, 40, fire.getPosition().x, fire.getPosition().y, 20))) {
 						st4 = 0;
 						if (intersect(enemy.getPosition().x, enemy.getPosition().y, 40, fire.getPosition().x, fire.getPosition().y, 20)){
 							eHealth -= 1;
@@ -171,16 +172,16 @@ void check(bool &st1, bool &st2, bool &st3, bool &st4, int  &timer, int &eHealth
 						if (eHealth < 0)
 							eHealth = 0;
 					}
-					if (seHealth > 1) {
+					if (seHealth >= 1) {
 
 						if (((fire.getPosition().y < 50 && unghi < 180 && unghi > 0)) ||
-							((unghi > 90 && unghi < 270 && obstacleLeft(mpcur, fire.getPosition().x, fire.getPosition().y))) ||
+							((unghi > 90 && unghi < 270 && obstacleLeft(mpcur, fire.getPosition().x, fire.getPosition().y, choosedMap))) ||
 							(fire.getPosition().x < 50 && ((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90))) ||
 							(fire.getPosition().x > window.getSize().x - 50 && unghi > 90 && unghi < 270) ||
 							(fire.getPosition().y > window.getSize().y - 50 && unghi > 180 && unghi < 360) ||
-							(((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90)) && obstacleRight(mpcur, fire.getPosition().x, fire.getPosition().y)) ||
-							(unghi > 0 && unghi < 180 && obstacleUp(mpcur, fire.getPosition().x, fire.getPosition().y)) ||
-							(unghi > 180 && unghi < 360 && obstacleDown(mpcur, fire.getPosition().x, fire.getPosition().y)) || (intersect(enemyTwo.getPosition().x, enemyTwo.getPosition().y, 25, fire.getPosition().x, fire.getPosition().y, 20))) {
+							(((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90)) && obstacleRight(mpcur, fire.getPosition().x, fire.getPosition().y, choosedMap)) ||
+							(unghi > 0 && unghi < 180 && obstacleUp(mpcur, fire.getPosition().x, fire.getPosition().y, choosedMap)) ||
+							(unghi > 180 && unghi < 360 && obstacleDown(mpcur, fire.getPosition().x, fire.getPosition().y, choosedMap)) || (intersect(enemyTwo.getPosition().x, enemyTwo.getPosition().y, 25, fire.getPosition().x, fire.getPosition().y, 20))) {
 							st1 = 0;
 							if (intersect(enemyTwo.getPosition().x, enemyTwo.getPosition().y, 40, fire.getPosition().x, fire.getPosition().y, 20))
 								seHealth -= 1;

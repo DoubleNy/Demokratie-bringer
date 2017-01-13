@@ -2,13 +2,16 @@
 #include <iostream>
 #include <math.h>
 #include "maps.h"
+#include "game.h"
 
 int firstLeft = 276;
 int firstDown = 276;
 int secondLeft = 450;
 int secondUp = 430;
 int xx, yy;
-bool obstacleLeft(int level[], int x, int y){
+bool obstacleLeft(int level[], int x, int y, int choosedMap){
+	if(choosedMap == 2)
+		return(0);
 	for (int i = 0; i < 22 * 29; i++)
 		 {
 			if (level[i] == 120 || level[i] == 121 || level[i] == 136 || level[i] == 137 || level[i] == 70 || level[i] == 71 || level[i] == 55 || level[i] == 86 || level[i] == 87 || level[i] == 18 || level[i] == 19 || level[i] == 114 || level[i] == 115 || level[i] == 130 || level[i] == 131)
@@ -25,7 +28,9 @@ bool obstacleLeft(int level[], int x, int y){
 }
  int firstRight = 420; 
  int secondRight = 620;
-bool obstacleRight(int level[], int x, int y) {
+bool obstacleRight(int level[], int x, int y , int choosedMap) {
+	if (choosedMap == 2)
+		return(0);
 	for (int i = 0; i < 22 * 29; i++)
 		 {
 		
@@ -41,7 +46,9 @@ bool obstacleRight(int level[], int x, int y) {
 			}
 	return 0;
 }
-bool obstacleUp(int level[], int x, int y) {
+bool obstacleUp(int level[], int x, int y, int choosedMap) {
+	if (choosedMap == 2)
+		return(0);
 	for (int i = 0; i < 22 * 29; i++)
 		 {
 		
@@ -57,7 +64,9 @@ bool obstacleUp(int level[], int x, int y) {
 			}
 	return 0;
 }
-bool obstacleDown(int level[], int x, int y) {
+bool obstacleDown(int level[], int x, int y, int choosedMap) {
+	if (choosedMap == 2)
+		return(0);
 	for (int i = 0; i < 22 * 29; i++)
 		 {
 		

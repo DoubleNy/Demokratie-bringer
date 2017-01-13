@@ -2,6 +2,7 @@
 #include "SFML\Audio.hpp"
 #include "menu.h"
 #include <algorithm>    // std::max
+
 int choosedMap;
 bool multiplayer = 0;
 
@@ -141,6 +142,9 @@ int start() {
 																									break;
 																								case 2:
 																									std::cout << "LEVEL III" << std::endl;
+																									choosedMap = 2;
+																									window.close();
+																									game();
 																									break;
 																								}
 																								break;

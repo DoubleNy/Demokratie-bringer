@@ -43,5 +43,6 @@ int ripPlayer = 0;
 int playerSpeed = 0;
 int enemySpeed = 0;
 int playerOneShot = 0;
+extern int choosedMap;
 int enemyOneShot = 0;
 #endif
