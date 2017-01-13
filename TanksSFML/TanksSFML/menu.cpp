@@ -25,7 +25,9 @@ Menu::Menu(float width, float height){
 	menu[2].setString("Exit");
 	menu[2].setCharacterSize(100);
 	menu[2].setPosition(sf::Vector2f(width / 2 - 80, height / (MAX_NUMBER_OF_ITEMS + 1) * 3 - 80));
-	
+
+
+
 	play[0].setFont(font);
 	play[0].setFillColor(sf::Color::Black);
 	play[0].setString("Level I");

@@ -20,8 +20,12 @@ int start() {
 	sf::Texture image1;
 	sf::Texture image2;
 	sf::Font fnt;
-	fnt.loadFromFile("arial.ttf");
-	image.loadFromFile("romanian.png");
+	sf::Font fnt2;
+	sf::Text tnm;
+	fnt2.loadFromFile("arial.ttf");
+	tnm.setFont(fnt2);
+	tnm.setCharacterSize(40);
+image.loadFromFile("romanian.png");
 		romanian.setTexture(&image);
 		romanian.setPosition(650, 10);
 	image1.loadFromFile("russian.png");
@@ -51,13 +55,23 @@ int start() {
 	bool musicIsPlaying = 0;
 	int lang = 2;
 	int CHmenu = 0;
+	tnm.setPosition(20, 20);
 	wallpaper.setTexture(&txt);
 	Menu meniu(window.getSize().x, window.getSize().y);
 	while (window.isOpen()) {
+		std::cout << lang << std::endl;
+		if(lang == 0)
+			tnm.setString("TANCURI");
+		else if(lang == 1)
+			tnm.setString(L"ТАНКИ");
+		else if(lang == 2)
+			tnm.setString("TANKS");
 		if (multiplayer)
 				modch.setString("Multiplayer mode");
 			else
 				modch.setString("Single mode");
+			tnm.setFillColor(sf::Color::Red);
+			tnm.setStyle(sf::Text::Bold);
 			modch.setFillColor(sf::Color::White);
 			modch.setPosition(700, 630);
 			window.draw(modch);
@@ -158,6 +172,8 @@ int start() {
 																					window.clear();
 																					window.draw(wallpaper);
 																					meniu.draw(1, window, lang);
+																					window.draw(tnm);
+
 																					window.draw(modch);
 																					window.display();
 																				}
@@ -246,6 +262,8 @@ int start() {
 																									window.clear();
 																									window.draw(wallpaper);
 																									meniu.draw(3, window, lang);
+																									window.draw(tnm);
+
 																									window.draw(modch);
 																									window.display();
 																								}
@@ -269,6 +287,7 @@ int start() {
 																				window.clear();
 																				window.draw(wallpaper);
 																				meniu.draw(2, window, lang);
+																				window.draw(tnm);
 																				window.draw(modch);
 																				window.display();
 																			}
@@ -292,6 +311,7 @@ int start() {
 		window.draw(romanian);
 		window.draw(russian);
 		window.draw(english);
+		window.draw(tnm);
 		meniu.draw(0, window, lang);
 		window.draw(modch);
 		window.display();

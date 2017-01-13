@@ -406,7 +406,7 @@ void game() {
 			}
 		if (player.getGlobalBounds().intersects(pwUp.getGlobalBounds()))
 			 {
-			pHealth += 20;
+			pHealth += 2;
 			if (pHealth > 100)
 				 pHealth = 100;
 			pwUp.setPosition(-100, -100);
@@ -424,7 +424,7 @@ void game() {
 			}
 		if (player.getGlobalBounds().intersects(pwUp.getGlobalBounds()))
 			 {
-			eHealth += 20;
+			eHealth += 2;
 			if (eHealth>100)
 				 eHealth = 100;
 			pwUp.setPosition(-100, -100);
@@ -891,7 +891,7 @@ if(multiplayer == 0 && choosedMap == 1){
 			timerFireSenemy--;
 		fromstart = std::max(fromstart-1, 0);
 		std::cout << "DSADAS" << fromstart << std::endl;
-		if(fromstart <= 0)
+		if(fromstart <= 0 && !mort)
 			check(s1, s2, s3, s4, timerFireSenemy, pHealth, ppr , fire2, player,enemyTwo, window, Sedx, Sedy, ung3); // trage inamicul
 		//std::cout << enemyTwolifes << std::endl;
 		if (enemyTwolifes == 5) {

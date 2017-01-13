@@ -1,13 +1,61 @@
-﻿  objects.cpp
-  tile.cpp
-tile.cpp(26): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
-tile.cpp(27): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
-tile.cpp(28): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
-tile.cpp(29): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
-tile.cpp(31): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
-tile.cpp(32): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
-tile.cpp(33): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
-tile.cpp(34): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+﻿  game.cpp
+c:\users\cristian\desktop\demokratie-bringer\tankssfml\tankssfml\tile.cpp(26): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\cristian\desktop\demokratie-bringer\tankssfml\tankssfml\tile.cpp(27): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\cristian\desktop\demokratie-bringer\tankssfml\tankssfml\tile.cpp(28): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\cristian\desktop\demokratie-bringer\tankssfml\tankssfml\tile.cpp(29): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\cristian\desktop\demokratie-bringer\tankssfml\tankssfml\tile.cpp(31): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\cristian\desktop\demokratie-bringer\tankssfml\tankssfml\tile.cpp(32): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\cristian\desktop\demokratie-bringer\tankssfml\tankssfml\tile.cpp(33): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\cristian\desktop\demokratie-bringer\tankssfml\tankssfml\tile.cpp(34): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+game.cpp(23): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+game.cpp(49): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+game.cpp(78): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+game.cpp(395): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+game.cpp(397): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+game.cpp(399): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+game.cpp(453): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+game.cpp(461): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+game.cpp(462): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+game.cpp(464): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+game.cpp(477): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+game.cpp(481): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+game.cpp(482): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+game.cpp(483): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+game.cpp(520): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+game.cpp(536): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+game.cpp(544): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+game.cpp(547): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+game.cpp(561): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+game.cpp(564): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+game.cpp(579): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+game.cpp(582): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+game.cpp(597): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+game.cpp(600): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+game.cpp(627): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+game.cpp(631): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+game.cpp(632): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+game.cpp(633): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+game.cpp(647): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+game.cpp(651): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+game.cpp(652): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+game.cpp(653): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+game.cpp(665): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+game.cpp(679): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+game.cpp(704): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+game.cpp(788): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+game.cpp(798): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+game.cpp(801): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+game.cpp(802): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+game.cpp(817): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+game.cpp(818): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+game.cpp(821): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+game.cpp(836): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+game.cpp(837): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+game.cpp(840): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+game.cpp(855): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+game.cpp(856): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+game.cpp(859): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+game.cpp(1077): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
   Generating code
   8 of 177 functions ( 4.5%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
