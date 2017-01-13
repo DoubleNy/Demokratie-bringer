@@ -38,6 +38,10 @@ void game() {
 	sf::RectangleShape enemy(sf::Vector2f(80, 75)); // creare dusman
 	sf::RectangleShape fire(sf::Vector2f(20, 20)); // foc 
 	sf::RectangleShape fire1(sf::Vector2f(20, 20));
+	
+	sf::RectangleShape colisionMap[638];
+
+
 	sf::Sprite explosion[26];
 	enemy.setPosition(Ecx, Ecy);
 	enemy.setRotation(Eangle);
@@ -187,6 +191,8 @@ void game() {
 //!load fire
 
 	// Incarcare harta, daca harta are probleme, e eroare.
+	TileMap map;
+	TileMap map1;
 	if (!map.load("tileset.png", sf::Vector2u(32, 32), level, 29, 22)) {
 		std::cout << "Un fel de eroare!!" << std::endl;
 		std::cin.get();
@@ -292,6 +298,7 @@ void game() {
 		Ethrust = 0;
 //------------------PLAYER'S MOVEMENTS-------------------------------------------------------------------------------------------------------------------------------------
 		if (choosedMap == 0) {
+			
 			if (KeyUp()) {
 				ja = 1;
 				case0 = 0;
@@ -299,16 +306,24 @@ void game() {
 				if (angle < 0) {
 					unghi = 360 + angle;
 				}
-				std::cout << unghi << std::endl;
+				
+				std::cout << player.getPosition().x<<' '<<player.getPosition().y<< std::endl;
 				//Daca pe axa y ne aflam intr-o pozitie cu y > 0 , continuam sa ne deplasam spre origine, altfel nu.
-				if ((player.getPosition().y < 50 && unghi < 180 && unghi > 0)); else
-					if ((unghi > 90 && unghi < 270 && obstacleLeft(player.getPosition().x, player.getPosition().y))); else
-						if (player.getPosition().x < 50 && ((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90))); else
-							if (player.getPosition().x > window.getSize().x - 50 && unghi > 90 && unghi < 270); else
-								if (player.getPosition().y > window.getSize().y - 50 && unghi > 180 && unghi < 360); else
-									if (((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90)) && obstacleRight(player.getPosition().x, player.getPosition().y)); else
-										if (unghi > 0 && unghi < 180 && obstacleUp(player.getPosition().x, player.getPosition().y)); else
-											if (unghi > 180 && unghi < 360 && obstacleDown(player.getPosition().x, player.getPosition().y));else
+				if ((player.getPosition().y < 50 && unghi < 180 && unghi > 0)); 
+				else
+					if ((unghi > 90 && unghi < 270 && obstacleLeft(player.getPosition().x, player.getPosition().y))); 
+					else
+						if (player.getPosition().x < 50 && ((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90)));
+						else
+							if (player.getPosition().x > window.getSize().x - 50 && unghi > 90 && unghi < 270);
+							else
+								if (player.getPosition().y > window.getSize().y - 50 && unghi > 180 && unghi < 360); 
+								else
+									if (((unghi > 270 && unghi < 360) || (unghi >= 0 && unghi < 90)) && obstacleRight(player.getPosition().x, player.getPosition().y)); else
+										if (unghi > 0 && unghi < 180 && obstacleUp(player.getPosition().x, player.getPosition().y)); 
+										else
+											if (unghi > 180 && unghi < 360 && obstacleDown(player.getPosition().x, player.getPosition().y));
+											else
 					thrust = true;
 			}
 			else
@@ -319,7 +334,7 @@ void game() {
 					if (angle < 0) {
 						unghi = 360 + angle;
 					}
-					std::cout << unghi << std::endl;
+					std::cout << player.getPosition().x << std::endl;
 					//Daca pe axa y ne afla intr-o pozitie cu y < window.Size().y , continuam sa ne deplasam spre margine, altfel nu.
 					if ((player.getPosition().y < 50 && unghi > 180 && unghi < 360)); else
 						if ((((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90)) && obstacleLeft(player.getPosition().x, player.getPosition().y))); else
@@ -331,8 +346,8 @@ void game() {
 												if (unghi > 0 && unghi < 180 && obstacleDown(player.getPosition().x, player.getPosition().y)); else
 													thrust = true;
 				}
-				else
-					if (KeyLeft()) {
+				
+				if (KeyLeft()) {
 						ja = 1;
 						case0 = 2;
 						angle -= 3;
@@ -340,9 +355,9 @@ void game() {
 						//player.rotate(-5);
 						//x = 3 * 69.4; a = 78; b = 62;
 						//Daca pe axa x ne aflam intr-o pozitie cu x > 0 ...sau nu intilnim un obstacol , continuam sa ne deplasam spre origine, altfel nu.
-						if (player.getPosition().x < 0 || obstacleRight(player.getPosition().x, player.getPosition().y))
-							player.move(0, 0);
-						else;
+						//if (player.getPosition().x < 0 || obstacleRight(player.getPosition().x, player.getPosition().y))
+						//	player.move(0, 0);
+						//else;
 							//player.move(-4.0, 0.0);
 					}
 					else
@@ -354,9 +369,9 @@ void game() {
 							//player.rotate(5);
 							//x = 2 * 68; a = 79; b = 63;
 							//Daca pe axa x ne aflam intr-o pozitie cu x < window.getSize().x ...sau nu intilnim un obstacol , continuam sa ne deplasam spre margine, altfel nu.
-							if ((player.getPosition().x >= window.getSize().x - 70) || obstacleLeft(player.getPosition().x, player.getPosition().y))
-								player.move(0, 0);
-							else;
+						//	if ((player.getPosition().x >= window.getSize().x - 70) || obstacleLeft(player.getPosition().x, player.getPosition().y))
+						//		player.move(0, 0);
+						//	else;
 								//player.move(4.0, 0.0);
 						}
 			//
@@ -366,7 +381,7 @@ void game() {
 					dy += sin(angle*DEGTORAD) * 20;//*0.2;
 			}
 
-			int maxSpeed = 2;
+			int maxSpeed = 15;
 			float speed = sqrt(dx*dx + dy*dy);
 			if (speed > maxSpeed) {
 				dx *= maxSpeed / speed;
@@ -807,287 +822,7 @@ else {
 					}
 					if (!displayed)
 									window.display();
-		}// else 
-		/* BOGDAN OUATU WORKSPACE*/
-			/*
-		if (choosedMap == 1) {
-			if (KeyUp()) {
-				case0 = 0;
-				x = 68;	a = 79; b = 63; // niste numere calculate cu precizie pentru a decupa partea necesara a tankului din poza cu ... tankuri . (?)
-										//Daca pe axa y ne aflam intr-o pozitie cu y > 0 , continuam sa ne deplasam spre origine, altfel nu.
-				if (player.getPosition().y < 0)
-					player.move(0, 0);
-				else
-					player.move(0.0, -10.0);
-			}
-			else
-				if (KeyDown()) {
-					case0 = 1;
-					x = 0;	a = 79; b = 63; // aceleasi numere;
-											//Daca pe axa y ne afla intr-o pozitie cu y < window.Size().y , continuam sa ne deplasam spre margine, altfel nu.
-					if (player.getPosition().y > window.getSize().y - 70)
-						player.move(0, 0);
-					else
-						player.move(0.0, 10.0);
-				}
-				else
-					if (KeyLeft()) {
-						case0 = 2;
-						x = 3 * 69.4; a = 78; b = 62;
-						//Daca pe axa x ne aflam intr-o pozitie cu x > 0 ...sau nu intilnim un obstacol , continuam sa ne deplasam spre origine, altfel nu.
-						if (player.getPosition().x < 0 )
-							player.move(0, 0);
-						else
-							player.move(-10.0, 0.0);
-					}
-					else
-						if (KeyRight()) {
-							case0 = 3;
-							x = 2 * 68; a = 79; b = 63;
-							//Daca pe axa x ne aflam intr-o pozitie cu x < window.getSize().x ...sau nu intilnim un obstacol , continuam sa ne deplasam spre margine, altfel nu.
-							if ((player.getPosition().x >= window.getSize().x - 70) )
-								player.move(0, 0);
-							else
-								player.move(10.0, 0.0);
-						}
-			//
-			if (!cnt && !exp) {
-				nextMove = next(enemy.getPosition().x, enemy.getPosition().y, player.getPosition().x, player.getPosition().y);
-				cnt = 20;
-			}
-			else
-				cnt--;
-			if (!exp) {
-				if (nextMove == 1) // 1 == UP
-					if (enemy.getPosition().y < 40 || obstacleUp(enemy.getPosition().x, enemy.getPosition().y))
-						enemy.move(0, 0);
-					else {
-						cs0 = 0;
-						enemy.move(0.0, -6.0);
-						x0 = 70;
-					}
-					if (nextMove == 2) // 2 == DOWN
-						if (enemy.getPosition().y > window.getSize().y - 100 || obstacleDown(enemy.getPosition().x, enemy.getPosition().y))
-							enemy.move(0, 0);
-						else {
-							cs0 = 1;
-							enemy.move(0.0, 6.0);
-							x0 = 0;
-						}
-						if (nextMove == 3) // 3 == LEFT
-							if (enemy.getPosition().x < 40 || obstacleRight(enemy.getPosition().x, enemy.getPosition().y))
-								enemy.move(0, 0);
-							else {
-								cs0 = 2;
-								enemy.move(-6, 0);
-								x0 = 3 * 69;
-							}
-							if (nextMove == 4) // 4 == GUESS
-								if ((enemy.getPosition().x >= window.getSize().x - 100) || obstacleLeft(enemy.getPosition().x, enemy.getPosition().y))
-									enemy.move(0, 0);
-								else {
-									cs0 = 3;
-									enemy.move(6, 0);
-									x0 = 2 * 69.5;
-								}
-			}
-							//Decupam bucatile necesare de tank
-							player.setTextureRect(sf::IntRect(x, 0, a, b));
-							enemy.setTextureRect(sf::IntRect(x0, 0, 78, 63));
-							//
-							int pressed = 0;
-							if (Space())
-								pressed = 1;
-							//
-							window.clear(); // curatire fereastra
-							details.clear(); // 
-											 //de aici pana "acolo" e o chestie legata de proiectilul player-ului
-							if (!ripPlayer && !timerFirePlayer)
-								if (pressed && !setted1 && !setted2 && !setted3 && !setted4) {
-									attack(fire, player, enemy, case0, timerFirePlayer, cx, cy, dx, dy);
-									if (case0 == 0 && !setted2 && !setted3 && !setted4)
-										setted1 = 1;
-									if (case0 == 1 && !setted1 && !setted3 && !setted4)
-										setted2 = 1;
-									if (case0 == 2 && !setted1 && !setted2 && !setted4)
-										setted3 = 1;
-									if (case0 == 3 && !setted1 && !setted2 && !setted3)
-										setted4 = 1;
-								}
-							//acolo
-							//
-							if (!exp && !timerFireEnemy)
-								if (!st1 && !st2 && !st3 && !st4) {
-									attack(fire1, enemy, player, cs0, timerFireEnemy, cx, cy, dx, dy);
-									if (cs0 == 0 && !st2 && !st3 && !st4)
-										st1 = 1;
-									if (cs0 == 1 && !st1 && !st3 && !st4)
-										st2 = 1;
-									if (cs0 == 2 && !st1 && !st2 && !st4)
-										st3 = 1;
-									if (cs0 == 3 && !st1 && !st2 && !st3)
-										st4 = 1;
-								}
-							if (choosedMap == 0)
-								window.draw(map); //desenam harta
-							else if (choosedMap == 1)
-								window.draw(map1);
-							if (!exp)
-								window.draw(enemy);
-							window.draw(player); // desenam jucatorul
-							check(setted1, setted2, setted3, setted4,timerFirePlayer, eHealth, fire, enemy, window, dx, dy,  angle); //trage jucatorul
-							check(st1, st2, st3, st4, timerFireEnemy, pHealth, fire1, player, window, dx, dy,  angle); // trage inamicul
+		}
 
-																					   //adica desenez alea 3 inimi de sus pentru player
-							if (playerLifes == 3) {
-								heartOne.setPosition(340, 0);
-								details.draw(heartOne);
-								heartOne.setPosition(300, 0);
-								details.draw(heartOne);
-								heartOne.setPosition(260, 0);
-								details.draw(heartOne);
-							}
-							else
-								// 2..
-								if (playerLifes == 2) {
-									heartOne.setPosition(340, 0);
-									details.draw(heartOne);
-									heartOne.setPosition(300, 0);
-									details.draw(heartOne);
-								}
-								else
-									//1..
-									if (playerLifes == 1) {
-										heartOne.setPosition(340, 0);
-										details.draw(heartOne);
-									}
-							// same here
-							if (enemyLifes == 3) {
-								heartOne.setPosition(640, 0);
-								details.draw(heartOne);
-								heartOne.setPosition(600, 0);
-								details.draw(heartOne);
-								heartOne.setPosition(560, 0);
-								details.draw(heartOne);
-							}
-							else
-								if (enemyLifes == 2) {
-									heartOne.setPosition(640, 0);
-									details.draw(heartOne);
-									heartOne.setPosition(600, 0);
-									details.draw(heartOne);
-								}
-								else
-									if (enemyLifes == 1) {
-										heartOne.setPosition(640, 0);
-										details.draw(heartOne);
-									}
-							bool displayed = 0;
-							time = clock.getElapsedTime();
-							fp = 1.0f / time.asSeconds();
-							clock.restart().asSeconds(); 		// 
-							str = std::to_string(fp);
-
-							std::string h;
-							h = std::to_string(eHealth);
-							enemyHealth.setString(h);
-							h = std::to_string(pHealth);
-							playerHealth.setString(h);
-
-							text.setString(str);
-							details.draw(text);
-							details.draw(fps);
-							details.draw(playerName);
-							details.draw(enemyName);
-							details.draw(playerHealth);
-							details.draw(enemyHealth);
-							details.display();
-							//daca inamicul e mort definitiv
-							if (eHealth <= 0 && enemyLifes == 1) {
-								Win.setPosition(300, 300);
-								window.clear();
-								if (choosedMap == 0)
-									window.draw(map); //desenam harta
-								else if (choosedMap == 1)
-									window.draw(map1);
-								//window.draw(map);
-								window.draw(player);
-								exploded.setPosition(enemy.getPosition().x, enemy.getPosition().y);
-								window.draw(exploded);
-								window.draw(Win);
-								window.display();
-								while (window.isOpen())
-									if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)) {
-										window.close();
-										details.close();
-									}
-							}
-							//daca inamicul  e mort , dar mai are o viata
-							else if (eHealth <= 0 && enemyLifes > 1) {
-								eHealth = 100;
-								enemyLifes--;
-								if (choosedMap == 0)
-									window.draw(map); //desenam harta
-								else if (choosedMap == 1)
-									window.draw(map1);
-								//window.draw(map);
-								exploded.setPosition(enemy.getPosition().x, enemy.getPosition().y);
-								exp = 50;
-								enemy.setPosition(860, 600);
-								window.draw(player);
-								//window.draw(exploded);
-								window.draw(enemy);
-								window.display();
-								displayed = 1;
-							}
-							if (pHealth <= 0 && playerLifes == 1) {
-								Win.setString("You Lost !!!");
-								Win.setPosition(300, 300);
-								window.clear();
-								if (choosedMap == 0)
-									window.draw(map); //desenam harta
-								else if (choosedMap == 1)
-									window.draw(map1);
-								//window.draw(map);
-								window.draw(enemy);
-								exploded.setPosition(player.getPosition().x, player.getPosition().y);
-								window.draw(exploded);
-								window.draw(Win);
-								window.display();
-								while (window.isOpen())
-									if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)) {
-										window.close();
-										details.close();
-									}
-							}
-							else if (pHealth <= 0) {
-								pHealth = 100;
-								playerLifes--;
-								if (choosedMap == 0)
-									window.draw(map); //desenam harta
-								else if (choosedMap == 1)
-									window.draw(map1);
-								//window.draw(map);
-								exploded.setPosition(player.getPosition().x, player.getPosition().y);
-								ripPlayer = 50;
-								player.setPosition(-8, 0);
-								window.draw(exploded);
-								window.draw(enemy);
-								window.display();
-								displayed = 1;
-							}
-							if (!displayed) {
-								if (exp) {
-									exp--;
-									window.draw(exploded);
-								}
-								if (ripPlayer) {
-									ripPlayer--;
-									window.draw(exploded);
-								}
-								window.display();
-							}
-	}
-	*/	
 	}
 }
