@@ -18,8 +18,6 @@ int start() {
 	sf::Texture image;
 	sf::Texture image1;
 	sf::Texture image2;
-	sf::Font fnt;
-	fnt.loadFromFile("arial.ttf");
 	image.loadFromFile("romanian.png");
 		romanian.setTexture(&image);
 		romanian.setPosition(650, 10);
@@ -30,9 +28,6 @@ int start() {
 		english.setTexture(&image2);
 		english.setPosition(850, 10);
 	sf::Texture txt;
-	sf::Text modch;
-	modch.setFont(fnt);
-	modch.setCharacterSize(20);
 	sf::Texture language;
 	sf::RectangleShape wallpaper(sf::Vector2f(924.0f, 704.0f));
 	if (!txt.loadFromFile("wall.png")) {
@@ -53,13 +48,6 @@ int start() {
 	wallpaper.setTexture(&txt);
 	Menu meniu(window.getSize().x, window.getSize().y);
 	while (window.isOpen()) {
-		if (multiplayer)
-				modch.setString("Multiplayer mode");
-			else
-				modch.setString("Single mode");
-			modch.setFillColor(sf::Color::White);
-			modch.setPosition(700, 630);
-			window.draw(modch);
 			sf::Event event;
 			if (1) {
 				sf::Vector2i position = sf::Mouse::getPosition(window);
@@ -104,10 +92,6 @@ int start() {
 																std::cout << " Play button has been pressed" << std::endl;
 																	//
 																				while (window.isOpen()) {
-																					if (multiplayer)
-																						modch.setString("Multiplayer mode");
-																					else
-																						modch.setString("Single mode");
 																					sf::Event event;
 																					while (window.pollEvent(event)) {
 																						switch (event.type) {
@@ -154,7 +138,6 @@ int start() {
 																					window.clear();
 																					window.draw(wallpaper);
 																					meniu.draw(1, window, lang);
-																					window.draw(modch);
 																					window.display();
 																				}
 																	//
@@ -163,10 +146,6 @@ int start() {
 																std::cout << "Option button has been pressed" << std::endl;
 																	//
 																			while (window.isOpen()) {
-																				if (multiplayer)
-																					modch.setString("Multiplayer mode");
-																				else
-																					modch.setString("Single mode");
 																				sf::Event event;
 																				while (window.pollEvent(event)) {
 																					switch (event.type) {
@@ -194,10 +173,6 @@ int start() {
 																								std::cout << "Game Mode" << std::endl;
 																								//
 																								while (window.isOpen()) {
-																									if (multiplayer)
-																										modch.setString("Multiplayer mode");
-																									else
-																										modch.setString("Single mode");
 																									sf::Event event;
 																									while (window.pollEvent(event)) {
 																										switch (event.type) {
@@ -242,7 +217,6 @@ int start() {
 																									window.clear();
 																									window.draw(wallpaper);
 																									meniu.draw(3, window, lang);
-																									window.draw(modch);
 																									window.display();
 																								}
 																								//
@@ -265,7 +239,6 @@ int start() {
 																				window.clear();
 																				window.draw(wallpaper);
 																				meniu.draw(2, window, lang);
-																				window.draw(modch);
 																				window.display();
 																			}
 																	//
@@ -289,7 +262,6 @@ int start() {
 		window.draw(russian);
 		window.draw(english);
 		meniu.draw(0, window, lang);
-		window.draw(modch);
 		window.display();
 	}
 	return(0);

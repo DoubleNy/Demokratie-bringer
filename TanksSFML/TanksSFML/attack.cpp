@@ -50,8 +50,8 @@ void check(bool &st1, bool &st2, bool &st3, bool &st4, int  &timer, int &eHealth
 								 (unghi > 0 && unghi < 180 && obstacleUp(fire.getPosition().x, fire.getPosition().y)) ||
 									 (unghi > 180 && unghi < 360 && obstacleDown(fire.getPosition().x, fire.getPosition().y)) || (intersect(enemy.getPosition().x, enemy.getPosition().y, 25, fire.getPosition().x, fire.getPosition().y, 20))) {
 			st1 = 0;
-			if (intersect(enemy.getPosition().x, enemy.getPosition().y, 40, fire.getPosition().x, fire.getPosition().y, 20))
-				eHealth -= 1;
+			if (intersect(enemy.getPosition().x, enemy.getPosition().y, 25, fire.getPosition().x, fire.getPosition().y, 20))
+				eHealth -= 10;
 			if (eHealth < 0)
 				eHealth = 0;
 		}
@@ -71,8 +71,8 @@ void check(bool &st1, bool &st2, bool &st3, bool &st4, int  &timer, int &eHealth
 				(unghi > 0 && unghi < 180 && obstacleUp(fire.getPosition().x, fire.getPosition().y)) ||
 				(unghi > 180 && unghi < 360 && obstacleDown(fire.getPosition().x, fire.getPosition().y))|| (intersect(enemy.getPosition().x, enemy.getPosition().y, 25, fire.getPosition().x, fire.getPosition().y, 20))) {
 				st2 = 0;
-				if (intersect(enemy.getPosition().x, enemy.getPosition().y, 40, fire.getPosition().x, fire.getPosition().y, 20))
-					eHealth -= 1;
+				if (intersect(enemy.getPosition().x, enemy.getPosition().y, 20, fire.getPosition().x, fire.getPosition().y, 20))
+					eHealth -= 10;
 				if (eHealth < 0)
 					eHealth = 0;
 			}
@@ -92,8 +92,8 @@ void check(bool &st1, bool &st2, bool &st3, bool &st4, int  &timer, int &eHealth
 					(unghi > 0 && unghi < 180 && obstacleUp(fire.getPosition().x, fire.getPosition().y)) ||
 					(unghi > 180 && unghi < 360 && obstacleDown(fire.getPosition().x, fire.getPosition().y))|| (fire.getPosition().x < 10) || (intersect(enemy.getPosition().x, enemy.getPosition().y, 25, fire.getPosition().x, fire.getPosition().y, 20))) {
 					st3 = 0;
-					if (intersect(enemy.getPosition().x, enemy.getPosition().y, 40, fire.getPosition().x, fire.getPosition().y, 20))
-						eHealth -= 1;
+					if (intersect(enemy.getPosition().x, enemy.getPosition().y, 20, fire.getPosition().x, fire.getPosition().y, 20))
+						eHealth -= 10;
 					if (eHealth < 0)
 						eHealth = 0;
 				}
@@ -113,8 +113,8 @@ void check(bool &st1, bool &st2, bool &st3, bool &st4, int  &timer, int &eHealth
 						(unghi > 0 && unghi < 180 && obstacleUp(fire.getPosition().x, fire.getPosition().y)) ||
 						(unghi > 180 && unghi < 360 && obstacleDown(fire.getPosition().x, fire.getPosition().y))|| (intersect(enemy.getPosition().x, enemy.getPosition().y, 25, fire.getPosition().x, fire.getPosition().y, 20))) {
 						st4 = 0;
-						if (intersect(enemy.getPosition().x, enemy.getPosition().y, 40, fire.getPosition().x, fire.getPosition().y, 20))
-							eHealth -= 1;
+						if (intersect(enemy.getPosition().x, enemy.getPosition().y, 25, fire.getPosition().x, fire.getPosition().y, 20))
+							eHealth -= 10;
 						if (eHealth < 0)
 							eHealth = 0;
 					}
