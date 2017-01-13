@@ -88,21 +88,91 @@ Menu::Menu(float width, float height){
 Menu::~Menu(){
 }
 void Menu::draw(int nbr, sf::RenderWindow &window, int language){
+	int width = window.getSize().x;
+	int height = window.getSize().y;
 	if (language == 0) {
-		menu[0].setString("Joacă");
-		menu[1].setString("Opțiuni");
-		menu[2].setString("Ieșire");
+		menu[0].setString(L"Joacă");
+		menu[1].setString(L"Opțiuni");
+		menu[2].setString(L"Ieșire");
+		menu[0].setPosition(sf::Vector2f(width / 2 - 120, height / (MAX_NUMBER_OF_ITEMS + 1) * 1 - 80));
+		menu[1].setPosition(sf::Vector2f(width / 2 - 160, height / (MAX_NUMBER_OF_ITEMS + 1) * 2 - 80));
+		menu[2].setPosition(sf::Vector2f(width / 2 - 110, height / (MAX_NUMBER_OF_ITEMS + 1) * 3 - 80));
+		//
+		play[0].setString(L"Nivelul I");
+		play[1].setString(L"Nivelul II");
+		play[2].setString(L"Nivelul III");
+		//
+		options[0].setString(L"Alege Tankul");
+		options[1].setString(L"Alege modul");
+		options[2].setString(L"Înapoi");
+		options[0].setPosition(sf::Vector2f(width / 2 - 270, height / (MAX_NUMBER_OF_ITEMS + 1) * 1 - 80));
+		options[1].setPosition(sf::Vector2f(width / 2 - 250, height / (MAX_NUMBER_OF_ITEMS + 1) * 2 - 80));
+		options[2].setPosition(sf::Vector2f(width / 2 - 110, height / (MAX_NUMBER_OF_ITEMS + 1) * 3 - 80));
+		//
+		mode[0].setString(L"Cu un prieten");
+		mode[1].setString(L"Singur");
+		mode[2].setString(L"Înapoi");
+		mode[0].setPosition(sf::Vector2f(width / 2 - 270, height / (MAX_NUMBER_OF_ITEMS + 1) * 1 - 80));
+		mode[1].setPosition(sf::Vector2f(width / 2 - 120, height / (MAX_NUMBER_OF_ITEMS + 1) * 2 - 80));
+		mode[2].setPosition(sf::Vector2f(width / 2 - 110, height / (MAX_NUMBER_OF_ITEMS + 1) * 3 - 80));
 	}
 	if (language == 1) {
-		menu[0].setString("Играть");
-		menu[1].setString("Настройки");
-		menu[2].setString("Выити");
-	}
-	if (language == 2) {
-		menu[0].setString("Play");
-		menu[1].setString("Options");
-		menu[2].setString("Exit");
+		menu[0].setString(L"Играть");
+		menu[1].setString(L"Настройки");
+		menu[2].setString(L"Выити");
+		menu[0].setPosition(sf::Vector2f(width / 2 - 120, height / (MAX_NUMBER_OF_ITEMS + 1) * 1 - 80));
+		menu[1].setPosition(sf::Vector2f(width / 2 - 200, height / (MAX_NUMBER_OF_ITEMS + 1) * 2 - 80));
+		menu[2].setPosition(sf::Vector2f(width / 2 - 110, height / (MAX_NUMBER_OF_ITEMS + 1) * 3 - 80));
 		//
+		play[0].setString(L"Уровень I");
+		play[1].setString(L"Уровень II");
+		play[2].setString(L"Уровень III");
+		play[0].setPosition(sf::Vector2f(width / 2 - 190, height / (MAX_NUMBER_OF_ITEMS + 1) * 1 - 80));
+		play[1].setPosition(sf::Vector2f(width / 2 - 200, height / (MAX_NUMBER_OF_ITEMS + 1) * 2 - 80));
+		play[2].setPosition(sf::Vector2f(width / 2 - 190, height / (MAX_NUMBER_OF_ITEMS + 1) * 3 - 80));
+		//
+		options[0].setString(L"Выбрать танк");
+		options[1].setString(L"Выбрать режим");
+		options[2].setString(L"Назад");
+		options[0].setPosition(sf::Vector2f(width / 2 - 300, height / (MAX_NUMBER_OF_ITEMS + 1) * 1 - 80));
+		options[1].setPosition(sf::Vector2f(width / 2 - 350, height / (MAX_NUMBER_OF_ITEMS + 1) * 2 - 80));
+		options[2].setPosition(sf::Vector2f(width / 2 - 120, height / (MAX_NUMBER_OF_ITEMS + 1) * 3 - 80));
+		//
+		mode[0].setString(L"С другом");
+		mode[1].setString(L"Одиночка");
+		mode[2].setString(L"Назад");
+		mode[0].setPosition(sf::Vector2f(width / 2 - 170, height / (MAX_NUMBER_OF_ITEMS + 1) * 1 - 80));
+		mode[1].setPosition(sf::Vector2f(width / 2 - 200, height / (MAX_NUMBER_OF_ITEMS + 1) * 2 - 80));
+		mode[2].setPosition(sf::Vector2f(width / 2 - 130, height / (MAX_NUMBER_OF_ITEMS + 1) * 3 - 80));
+}
+	if (language == 2) {
+		menu[0].setString(L"Play");
+		menu[1].setString(L"Options");
+		menu[2].setString(L"Exit");
+		menu[0].setPosition(sf::Vector2f(width / 2 - 90, height / (MAX_NUMBER_OF_ITEMS + 1) * 1 - 80));
+		menu[1].setPosition(sf::Vector2f(width / 2 - 160, height / (MAX_NUMBER_OF_ITEMS + 1) * 2 - 80));
+		menu[2].setPosition(sf::Vector2f(width / 2 - 80, height / (MAX_NUMBER_OF_ITEMS + 1) * 3 - 80));
+		//
+		play[0].setString(L"Level I");
+		play[1].setString(L"Level II");
+		play[2].setString(L"Level III");
+		play[0].setPosition(sf::Vector2f(325, 100));
+		play[1].setPosition(sf::Vector2f(310, 250));
+		play[2].setPosition(sf::Vector2f(295, 400));
+		//
+		options[0].setString(L"Choose Tank");
+		options[1].setString(L"Game Mode");
+		options[2].setString(L"Back");
+		options[0].setPosition(sf::Vector2f(200, 100));
+		options[1].setPosition(sf::Vector2f(200, 250));
+		options[2].setPosition(sf::Vector2f(360, 400));
+		//
+		mode[0].setString(L"Multiplayer");
+		mode[1].setString(L"Single");
+		mode[2].setString(L"Back");
+		mode[0].setPosition(sf::Vector2f(200, 100));
+		mode[1].setPosition(sf::Vector2f(300, 250));
+		mode[2].setPosition(sf::Vector2f(350, 400));
 	}
 	for (int i = 0; i < MAX_NUMBER_OF_ITEMS; i++){
 		if (nbr == 0)

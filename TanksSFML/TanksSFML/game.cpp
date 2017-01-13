@@ -14,15 +14,17 @@
 #include "vars.hpp"
 int choosedTankplayer = 0;
 int choosedTankenemy = 1;
+int choosedTanksenemy = 2;
+int mpcur[29*22];
 //using namespace std;
 float DEGTORAD = 0.017453f;
-
 void game() {
 	srand(time(NULL));
 	sf::Music music;
 	sf::Music moving;
 	sf::Music shot;	
 	int exp = 0;
+	int exp1 = 0;
 	std::string str;
 	sf::Clock clock;
 	sf::Time time;
@@ -36,36 +38,23 @@ void game() {
 	sf::RectangleShape heartOne(sf::Vector2f(50, 35)); // Inima
 	sf::RectangleShape exploded(sf::Vector2f(80, 80)); // explozie
 	sf::RectangleShape enemy(sf::Vector2f(80, 75)); // creare dusman
+	sf::RectangleShape enemyTwo(sf::Vector2f(80, 75)); // creare dusman
 	sf::RectangleShape fire(sf::Vector2f(20, 20)); // foc 
 	sf::RectangleShape fire1(sf::Vector2f(20, 20));
-	sf::RectangleShape pwOneShot(sf::Vector2f(32, 32));
-	sf::RectangleShape pwSpeed(sf::Vector2f(32, 32));
-	sf::RectangleShape pwUp(sf::Vector2f(32, 32));
-	
-	
-	sf::Texture pwOneShotT;
-	pwOneShotT.loadFromFile("oneShot.png");
-	pwOneShot.setTexture(&pwOneShotT);
-	
-	sf::Texture pwSpeedT;
-	pwSpeedT.loadFromFile("speed.png");
-	pwSpeed.setTexture(&pwSpeedT);
-
-	sf::Texture pwUpT;
-	pwUpT.loadFromFile("heart.png");
-	pwUp.setTexture(&pwUpT);
-
-	pwUp.setPosition(100, 100);
-	pwSpeed.setPosition(401, 300);
-	pwOneShot.setPosition(300, 300);
+	sf::RectangleShape fire2(sf::Vector2f(20, 20));
+	sf::RectangleShape colisionMap[638];
 	sf::Sprite explosion[26];
 	enemy.setPosition(Ecx, Ecy);
 	enemy.setRotation(Eangle);
 	enemy.setOrigin(80 / 2, 75 / 2);
+	//
+	enemyTwo.setPosition(Secx, Secy);
+	enemyTwo.setRotation(Seangle);
+	enemyTwo.setOrigin(80 / 2, 75 / 2);
+	//
+	TileMap map;
+	TileMap map1;
 	//if (1) {
-	
-
-
 	sf::Texture txt1;
 	txt1.loadFromFile("1.png");
 	explosion[1].setTexture(txt1);
@@ -172,32 +161,32 @@ void game() {
 	sf::Texture heart;                 //  Incarcare imagine inima 
 	heart.loadFromFile("heart.png");
 	heartOne.setTexture(&heart);
-	
-	
 
 //load tanks	
 	sf::Texture texture; // Incarcare imagine inamic,jucator
 		sf::Texture tnk1;
 		tnk1.loadFromFile("tank1.png");
 		player.setTexture(&tnk1);
-		enemy.setTexture(&tnk1);
+		player.setOrigin(80 / 2, 60 / 2);
 
 		sf::Texture tnk2;
 		tnk2.loadFromFile("tank2.png");
-
 		sf::Texture tnk3;
 		tnk3.loadFromFile("tank3.png");
-		
+		enemyTwo.setTexture(&tnk1);
 		if (choosedTankplayer == 1)
 			player.setTexture(&tnk2);
 		if (choosedTankplayer == 2)
-			player.setTexture(&tnk3);
+			player.setTexture(&tnk3);	
 		if (choosedTankenemy == 1)
 			enemy.setTexture(&tnk2);
 		if (choosedTankenemy == 2)
 			enemy.setTexture(&tnk3);
-		player.setOrigin(80 / 2, 60 / 2);
-
+		if(choosedTanksenemy == 1)
+			enemyTwo.setTexture(&tnk2);
+		if (choosedTanksenemy == 2)
+			enemyTwo.setTexture(&tnk3);
+		
 //!load tanks
 
 //load fire
@@ -205,16 +194,14 @@ void game() {
 	firetext.loadFromFile("fire.png");
 	fire.setTexture(&firetext);
 	fire1.setTexture(&firetext);
-
+	fire2.setTexture(&firetext);
 	sf::Texture expl;  // Incarcare imagine explozie
 	expl.loadFromFile("exploded.png");
 	exploded.setTexture(&expl);
 //!load fire
 
 	// Incarcare harta, daca harta are probleme, e eroare.
-	TileMap map;
-	TileMap map1;
-	if (!map.load("tileset.png", sf::Vector2u(32, 32), level, 29, 22)) {
+/*	if (!map.load("tileset.png", sf::Vector2u(32, 32), level, 29, 22)) {
 		std::cout << "Un fel de eroare!!" << std::endl;
 		std::cin.get();
 		return;
@@ -223,7 +210,7 @@ void game() {
 		std::cout << "Altfel de eroare!!" << std::endl;
 		std::cin.get();
 		return;
-	}
+	}*/
 	//
 	sf::Font font;
 	if (!font.loadFromFile("arial.ttf")) {
@@ -240,7 +227,7 @@ void game() {
 	playerHealth.setCharacterSize(20);
 	playerHealth.setFillColor(sf::Color::White);
 	playerHealth.setStyle(sf::Text::Bold);
-	playerHealth.setPosition(500, 0);
+	playerHealth.setPosition(460, 0);
 
 	sf::Text enemyHealth;
 	enemyHealth.setFont(font);
@@ -250,13 +237,21 @@ void game() {
 	enemyHealth.setStyle(sf::Text::Bold);
 	enemyHealth.setPosition(800, 0);
 
+	sf::Text enemyTwoHealth;
+	enemyTwoHealth.setFont(font);
+	enemyTwoHealth.setString("100");
+	enemyTwoHealth.setCharacterSize(20);
+	enemyTwoHealth.setFillColor(sf::Color::White);
+	enemyTwoHealth.setStyle(sf::Text::Bold);
+	enemyTwoHealth.setPosition(500, 50);
+
 	sf::Text playerName;
 	playerName.setFont(font);
 	playerName.setString("PLAYER:");
 	playerName.setCharacterSize(20);
 	playerName.setFillColor(sf::Color::White);
 	playerName.setStyle(sf::Text::Bold);
-	playerName.setPosition(400, 0);
+	playerName.setPosition(360, 0);
 
 	sf::Text enemyName;
 	enemyName.setFont(font);
@@ -266,6 +261,14 @@ void game() {
 	enemyName.setStyle(sf::Text::Bold);
 	enemyName.setPosition(700, 0);
 
+	sf::Text enemyTwoName;
+	enemyTwoName.setFont(font);
+	enemyTwoName.setString("ENEMY Two:");
+	enemyTwoName.setCharacterSize(20);
+	enemyTwoName.setFillColor(sf::Color::White);
+	enemyTwoName.setStyle(sf::Text::Bold);
+	enemyTwoName.setPosition(370, 50);
+//sadasdasdsdsadsad
 	sf::Text text;
 	text.setFont(font);
 	text.setString("30 ");
@@ -287,10 +290,7 @@ void game() {
 	fps.setStyle(sf::Text::Bold);
 	fps.setPosition(40, 0);
 //!load texts
-	int playerSpeed=0;
-	int enemySpeed=0;
-	int playerOneShot=0;
-	int enemyOneShot = 0;
+
 	sf::Image icon;
 	if (!icon.loadFromFile("icon.png")) {
 		std::cout << "Probleme cu iconita";
@@ -298,15 +298,34 @@ void game() {
    }
 	window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 	window.setFramerateLimit(30);//fixare limita fps		
-	//Loop-ul principal;///////////////////////////////////////////////////////////////////////
+	//Loop-ul principal;
 	moving.setLoop(1);
 	moving.play();
-	int pwT = 300;
+	if (choosedMap == 0) {
+		if (!map.load("tileset.png", sf::Vector2u(32, 32), level, 29, 22)) {
+			std::cout << "Un fel de eroare!!" << std::endl;
+			std::cin.get();
+			return;
+		}
+		for (int i = 0; i < 29 * 22; i++)
+			mpcur[i] = level[i];
+	}
+	if (choosedMap == 1) {
+		if (!map.load("tileset.png", sf::Vector2u(32, 32), level0, 29, 22)) {
+			std::cout << "Un fel de eroare!!" << std::endl;
+			std::cin.get();
+			return;
+		}
+		for (int i = 0; i < 29 * 22; i++)
+			mpcur[i] = level0[i];
+	}
 	while (window.isOpen()) {
 		thrust = false;
 		Ethrust = false;
+		Sethrust = false;
 		ja = 0;
 		ja2 = 0;
+		ja3 = 0;
 		//eveniment pentru inchiderea ferestrei
 		sf::Event event;
 		while (window.pollEvent(event)) {
@@ -320,73 +339,8 @@ void game() {
 			if (event.type == sf::Event::Closed)
 				details.close();
 		}
-		Ethrust = 0;
-		// management powerUpsuri
-		pwT--;
-		playerSpeed--;
-		enemySpeed--;
-		playerOneShot--;
-		enemyOneShot--;
-		if (pwT == 0) {
-			pwT = 500;
-			int q = rand() % 5;
-			
-				int i=rand()%(29*22);
-				while (level[i] == 120 || level[i] == 121 || level[i] == 136 || level[i] == 137 || level[i] == 70 || level[i] == 71 || level[i] == 55 || level[i] == 86 || level[i] == 87 || level[i] == 18 || level[i] == 19 || level[i] == 114 || level[i] == 115 || level[i] == 130 || level[i] == 131)
-				{
-					{
-						i = rand() % (29*22);
-					}
-				}
-				if (q == 0)
-					pwUp.setPosition(i % 29 * 32, i / 29 * 32);
-				else if (q == 1)
-					pwOneShot.setPosition(i % 29 * 32, i / 29 * 32);
-				else
-					pwSpeed.setPosition(i % 29 * 32, i / 29 * 32);
-		}
-		if (player.getGlobalBounds().intersects(pwSpeed.getGlobalBounds()))
-		{
-			playerSpeed = 200;
-			pwSpeed.setPosition(-100, -100);
-		}
-		if (player.getGlobalBounds().intersects(pwUp.getGlobalBounds()))
-		{
-			pHealth += 20;
-			if (pHealth > 100)
-				pHealth = 100;
-			pwUp.setPosition(-100, -100);
-		}
-		if (player.getGlobalBounds().intersects(pwOneShot.getGlobalBounds()))
-		{
-			playerOneShot = 200;
-			pwOneShot.setPosition(-100, -100);
-			std::cout << "ONE OPORTUNITY";
-		}
-		if (enemy.getGlobalBounds().intersects(pwSpeed.getGlobalBounds()))
-		{
-			enemySpeed = 200;
-			pwSpeed.setPosition(-100, -100);
-		}
-		if (player.getGlobalBounds().intersects(pwUp.getGlobalBounds()))
-		{
-			eHealth += 20;
-			if(eHealth>100)
-				eHealth = 100;
-			pwUp.setPosition(-100, -100);
-		}
-		if (player.getGlobalBounds().intersects(pwOneShot.getGlobalBounds()))
-		{
-			enemyOneShot = 200;
-			pwOneShot.setPosition(-100, -100);
-		}
-		if (enemy.getGlobalBounds().intersects(fire.getGlobalBounds()) && playerOneShot > 0)
-			eHealth = 0;
-		if (player.getGlobalBounds().intersects(fire.getGlobalBounds()) && enemyOneShot > 0)
-			pHealth = 0;
 //------------------PLAYER'S MOVEMENTS-------------------------------------------------------------------------------------------------------------------------------------
-		if (choosedMap == 0) {
-			
+		if (1) {
 			if (KeyUp()) {
 				ja = 1;
 				case0 = 0;
@@ -394,24 +348,21 @@ void game() {
 				if (angle < 0) {
 					unghi = 360 + angle;
 				}
-				
-				std::cout << player.getPosition().x<<' '<<player.getPosition().y<< std::endl;
-				//Daca pe axa y ne aflam intr-o pozitie cu y > 0 , continuam sa ne deplasam spre origine, altfel nu.
-				if ((player.getPosition().y < 50 && unghi < 180 && unghi > 0)); 
+				if ((player.getPosition().y < 50 && unghi < 180 && unghi > 0));
 				else
-					if ((unghi > 90 && unghi < 270 && obstacleLeft(player.getPosition().x, player.getPosition().y))); 
-					else
-						if (player.getPosition().x < 50 && ((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90)));
-						else
-							if (player.getPosition().x > window.getSize().x - 50 && unghi > 90 && unghi < 270);
-							else
-								if (player.getPosition().y > window.getSize().y - 50 && unghi > 180 && unghi < 360); 
-								else
-									if (((unghi > 270 && unghi < 360) || (unghi >= 0 && unghi < 90)) && obstacleRight(player.getPosition().x, player.getPosition().y)); else
-										if (unghi > 0 && unghi < 180 && obstacleUp(player.getPosition().x, player.getPosition().y)); 
-										else
-											if (unghi > 180 && unghi < 360 && obstacleDown(player.getPosition().x, player.getPosition().y));
-											else
+					 if ((unghi > 90 && unghi < 270 && obstacleLeft(mpcur, player.getPosition().x, player.getPosition().y)));
+				else
+					 if (player.getPosition().x < 50 && ((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90)));
+				else
+					 if (player.getPosition().x > window.getSize().x - 50 && unghi > 90 && unghi < 270);
+				else
+					 if (player.getPosition().y > window.getSize().y - 50 && unghi > 180 && unghi < 360);
+				else
+					 if (((unghi > 270 && unghi < 360) || (unghi >= 0 && unghi < 90)) && obstacleRight(mpcur, player.getPosition().x, player.getPosition().y)); else
+					 if (unghi > 0 && unghi < 180 && obstacleUp(mpcur, player.getPosition().x, player.getPosition().y));
+				else
+					 if (unghi > 180 && unghi < 360 && obstacleDown(mpcur, player.getPosition().x, player.getPosition().y));
+				else
 					thrust = true;
 			}
 			else
@@ -422,31 +373,22 @@ void game() {
 					if (angle < 0) {
 						unghi = 360 + angle;
 					}
-					std::cout << player.getPosition().x << std::endl;
-					//Daca pe axa y ne afla intr-o pozitie cu y < window.Size().y , continuam sa ne deplasam spre margine, altfel nu.
 					if ((player.getPosition().y < 50 && unghi > 180 && unghi < 360)); else
-						if ((((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90)) && obstacleLeft(player.getPosition().x, player.getPosition().y))); else
+						if ((((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90)) && obstacleLeft(mpcur, player.getPosition().x, player.getPosition().y))); else
 							if (player.getPosition().x < 50 && unghi > 90 && unghi < 270); else
 								if (player.getPosition().x > window.getSize().x - 50 && ((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90))); else
 									if (player.getPosition().y > window.getSize().y - 50 && unghi > 0 && unghi < 180); else
-										if (unghi > 90 && unghi < 270 && obstacleRight(player.getPosition().x, player.getPosition().y)); else
-											if (unghi > 180 && unghi < 360 && obstacleUp(player.getPosition().x, player.getPosition().y)); else
-												if (unghi > 0 && unghi < 180 && obstacleDown(player.getPosition().x, player.getPosition().y)); else
+										if (unghi > 90 && unghi < 270 && obstacleRight(mpcur, player.getPosition().x, player.getPosition().y)); else
+											if (unghi > 180 && unghi < 360 && obstacleUp(mpcur, player.getPosition().x, player.getPosition().y)); else
+												if (unghi > 0 && unghi < 180 && obstacleDown(mpcur, player.getPosition().x, player.getPosition().y)); else
 													thrust = true;
 				}
-				
-				if (KeyLeft()) {
+				//else
+					if (KeyLeft()) {
 						ja = 1;
 						case0 = 2;
 						angle -= 3;
 						angle %= 361;
-						//player.rotate(-5);
-						//x = 3 * 69.4; a = 78; b = 62;
-						//Daca pe axa x ne aflam intr-o pozitie cu x > 0 ...sau nu intilnim un obstacol , continuam sa ne deplasam spre origine, altfel nu.
-						//if (player.getPosition().x < 0 || obstacleRight(player.getPosition().x, player.getPosition().y))
-						//	player.move(0, 0);
-						//else;
-							//player.move(-4.0, 0.0);
 					}
 					else
 						if (KeyRight()) {
@@ -454,13 +396,6 @@ void game() {
 							case0 = 3;
 							angle += 3;
 							angle %= 361;
-							//player.rotate(5);
-							//x = 2 * 68; a = 79; b = 63;
-							//Daca pe axa x ne aflam intr-o pozitie cu x < window.getSize().x ...sau nu intilnim un obstacol , continuam sa ne deplasam spre margine, altfel nu.
-						//	if ((player.getPosition().x >= window.getSize().x - 70) || obstacleLeft(player.getPosition().x, player.getPosition().y))
-						//		player.move(0, 0);
-						//	else;
-								//player.move(4.0, 0.0);
 						}
 			//
 		if(!ripPlayer){
@@ -469,9 +404,7 @@ void game() {
 					dy += sin(angle*DEGTORAD) * 20;//*0.2;
 			}
 
-			int maxSpeed = 15;
-			if (playerSpeed > 0)
-				maxSpeed *= 2;
+			int maxSpeed = 2;
 			float speed = sqrt(dx*dx + dy*dy);
 			if (speed > maxSpeed) {
 				dx *= maxSpeed / speed;
@@ -490,6 +423,11 @@ void game() {
 			else
 				moving.setVolume(20);
 
+//-----------------------------------------------------------------------------
+//if (multiplayer = 0 && choosedMap == 1) {
+//}
+//-----------------------------------------------------------------------------
+
 //DACA ESTE SINGLR
 if(multiplayer == 0){
 			if (!cnt) {
@@ -501,7 +439,7 @@ if(multiplayer == 0){
 
 //-----------------------ENEMY'S MOVEMENTS---------------------------------------------------------------------------------------------------------------------------------------------------
 			if (nextMove == 1) // 1 == UP
-				if (enemy.getPosition().y < 40 || obstacleUp(enemy.getPosition().x, enemy.getPosition().y))
+				if (enemy.getPosition().y < 40 || obstacleUp(mpcur, enemy.getPosition().x, enemy.getPosition().y))
 					enemy.move(0, 0);
 				else {
 					if (distance(enemy.getPosition().x, enemy.getPosition().y, player.getPosition().x, player.getPosition().y) < 150)
@@ -518,7 +456,7 @@ if(multiplayer == 0){
 					}			
 			}
 			if (nextMove == 2) // 2 == DOWN
-				if (enemy.getPosition().y > window.getSize().y - 100 || obstacleDown(enemy.getPosition().x, enemy.getPosition().y))
+				if (enemy.getPosition().y > window.getSize().y - 100 || obstacleDown(mpcur, enemy.getPosition().x, enemy.getPosition().y))
 						enemy.move(0, 0);
 				else {
 					if (distance(enemy.getPosition().x, enemy.getPosition().y, player.getPosition().x, player.getPosition().y) < 150)
@@ -536,7 +474,7 @@ if(multiplayer == 0){
 					}				
 				}
 			if (nextMove == 3) // 3 == LEFT
-				if (enemy.getPosition().x < 40 || obstacleRight(enemy.getPosition().x, enemy.getPosition().y))
+				if (enemy.getPosition().x < 40 || obstacleRight(mpcur, enemy.getPosition().x, enemy.getPosition().y))
 						enemy.move(0, 0);
 				else {
 					if (distance(enemy.getPosition().x, enemy.getPosition().y, player.getPosition().x, player.getPosition().y) < 150)
@@ -554,7 +492,7 @@ if(multiplayer == 0){
 						}				
 				}
 			if (nextMove == 4) // 4 == GUESS
-				if ((enemy.getPosition().x >= window.getSize().x - 100) || obstacleLeft(enemy.getPosition().x, enemy.getPosition().y))
+				if ((enemy.getPosition().x >= window.getSize().x - 100) || obstacleLeft(mpcur, enemy.getPosition().x, enemy.getPosition().y))
 						enemy.move(0, 0);
 					else {
 					if (distance(enemy.getPosition().x, enemy.getPosition().y, player.getPosition().x, player.getPosition().y) < 150)
@@ -584,13 +522,13 @@ else {
 									//std::cout << unghi << std::endl;
 									//Daca pe axa y ne aflam intr-o pozitie cu y > 0 , continuam sa ne deplasam spre origine, altfel nu.
 									if ((enemy.getPosition().y < 50 && unghi < 180 && unghi > 0)); else
-										if ((unghi > 90 && unghi < 270 && obstacleLeft(enemy.getPosition().x, enemy.getPosition().y))); else
+										if ((unghi > 90 && unghi < 270 && obstacleLeft(mpcur, enemy.getPosition().x, enemy.getPosition().y))); else
 											if (enemy.getPosition().x < 50 && ((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90))); else
 												if (enemy.getPosition().x > window.getSize().x - 50 && unghi > 90 && unghi < 270); else
 													if (enemy.getPosition().y > window.getSize().y - 50 && unghi > 180 && unghi < 360); else
-														if (((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90)) && obstacleRight(enemy.getPosition().x, enemy.getPosition().y)); else
-															if (unghi > 0 && unghi < 180 && obstacleUp(enemy.getPosition().x, enemy.getPosition().y)); else
-																if (unghi > 180 && unghi < 360 && obstacleDown(enemy.getPosition().x, enemy.getPosition().y)); else
+														if (((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90)) && obstacleRight(mpcur, enemy.getPosition().x, enemy.getPosition().y)); else
+															if (unghi > 0 && unghi < 180 && obstacleUp(mpcur, enemy.getPosition().x, enemy.getPosition().y)); else
+																if (unghi > 180 && unghi < 360 && obstacleDown(mpcur, enemy.getPosition().x, enemy.getPosition().y)); else
 																	Ethrust = true;
 								}
 								else
@@ -604,13 +542,13 @@ else {
 										//std::cout << unghi << std::endl;
 										//Daca pe axa y ne afla intr-o pozitie cu y < window.Size().y , continuam sa ne deplasam spre margine, altfel nu.
 										if ((enemy.getPosition().y < 50 && unghi > 180 && unghi < 360)); else
-											if ((((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90)) && obstacleLeft(enemy.getPosition().x, enemy.getPosition().y))); else
+											if ((((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90)) && obstacleLeft(mpcur, enemy.getPosition().x, enemy.getPosition().y))); else
 												if (enemy.getPosition().x < 50 && unghi > 90 && unghi < 270); else
 													if (enemy.getPosition().x > window.getSize().x - 50 && ((unghi > 270 && unghi < 360) || (unghi > 1 && unghi < 90))); else
 														if (enemy.getPosition().y > window.getSize().y - 50 && unghi > 0 && unghi < 180); else
-															if (unghi > 90 && unghi < 270 && obstacleRight(enemy.getPosition().x, enemy.getPosition().y)); else
-																if (unghi > 180 && unghi < 360 && obstacleUp(enemy.getPosition().x, enemy.getPosition().y)); else
-																	if (unghi > 0 && unghi < 180 && obstacleDown(enemy.getPosition().x, enemy.getPosition().y)); else
+															if (unghi > 90 && unghi < 270 && obstacleRight(mpcur, enemy.getPosition().x, enemy.getPosition().y)); else
+																if (unghi > 180 && unghi < 360 && obstacleUp(mpcur, enemy.getPosition().x, enemy.getPosition().y)); else
+																	if (unghi > 0 && unghi < 180 && obstacleDown(mpcur, enemy.getPosition().x, enemy.getPosition().y)); else
 																		Ethrust = true;
 									}
 									else
@@ -622,7 +560,7 @@ else {
 											//player.rotate(-5);
 											//x = 3 * 69.4; a = 78; b = 62;
 											//Daca pe axa x ne aflam intr-o pozitie cu x > 0 ...sau nu intilnim un obstacol , continuam sa ne deplasam spre origine, altfel nu.
-											if (enemy.getPosition().x < 0 || obstacleRight(enemy.getPosition().x, enemy.getPosition().y))
+											if (enemy.getPosition().x < 0 || obstacleRight(mpcur, enemy.getPosition().x, enemy.getPosition().y))
 												enemy.move(0, 0);
 											else;
 											//player.move(-4.0, 0.0);
@@ -636,7 +574,7 @@ else {
 												//player.rotate(5);
 												//x = 2 * 68; a = 79; b = 63;
 												//Daca pe axa x ne aflam intr-o pozitie cu x < window.getSize().x ...sau nu intilnim un obstacol , continuam sa ne deplasam spre margine, altfel nu.
-												if ((enemy.getPosition().x >= window.getSize().x - 70) || obstacleLeft(enemy.getPosition().x, enemy.getPosition().y))
+												if ((enemy.getPosition().x >= window.getSize().x - 70) || obstacleLeft(mpcur, enemy.getPosition().x, enemy.getPosition().y))
 													enemy.move(0, 0);
 												else;
 												//player.move(4.0, 0.0);
@@ -732,31 +670,197 @@ else {
 
 
 }
-						window.draw(map); //desenam harta
+							window.draw(map); //desenam harta
+
+
+// A LOT OF BUGS WITH ENEMY TWO
+/*
+//ENEMYTWO----------------------------------							
+if(multiplayer == 0 && choosedMap == 1){
+	//window.draw(enemyTwo);
+	int nextMove1;
+	if (!cnt2) {
+		nextMove1 = next(enemyTwo.getPosition().x, enemyTwo.getPosition().y, player.getPosition().x, player.getPosition().y, Seangle, enemyTwo);
+		cnt2 = 20;
+	}
+	else
+		cnt2--;
+	//std::cout << nextMove1 << std::endl;
+	//-----------------------ENEMY'S MOVEMENTS---------------------------------------------------------------------------------------------------------------------------------------------------
+	if (nextMove1 == 1) // 1 == UP
+		if (enemyTwo.getPosition().y < 40 || obstacleUp(mpcur, enemyTwo.getPosition().x, enemyTwo.getPosition().y))
+			enemyTwo.move(0, 0);
+		else {
+			if (distance(enemyTwo.getPosition().x, enemyTwo.getPosition().y, player.getPosition().x, player.getPosition().y) < 150 || 
+				distance(enemyTwo.getPosition().x, enemyTwo.getPosition().y, enemy.getPosition().x, enemy.getPosition().y) < 150)
+			{
+				enemyTwo.setRotation(180);
+				Seangle = 180;
+				cs01 = 0;
+				enemyTwo.move(0.0, 0.0);
+			}
+			else {
+				enemyTwo.setRotation(180);
+				Seangle = 180;
+				cs01 = 0;
+				enemyTwo.move(0.0, -2.0);
+			}
+		}
+		if (nextMove1 == 2) // 2 == DOWN
+			if (enemyTwo.getPosition().y > window.getSize().y - 100 || obstacleDown(mpcur, enemyTwo.getPosition().x, enemyTwo.getPosition().y) || 
+				distance(enemyTwo.getPosition().x, enemyTwo.getPosition().y, enemy.getPosition().x, enemy.getPosition().y) < 150)
+				enemyTwo.move(0, 0);
+			else {
+				if (distance(enemyTwo.getPosition().x, enemyTwo.getPosition().y, player.getPosition().x, player.getPosition().y) < 150)
+				{
+					enemyTwo.setRotation(0);
+					Seangle = 0;
+					cs01 = 1;
+					enemyTwo.move(0.0, 0.0);
+				}
+				else {
+					enemyTwo.setRotation(0);
+					Seangle = 0;
+					cs01 = 1;
+					enemyTwo.move(0.0, 2.0);
+				}
+			}
+			if (nextMove1 == 3) // 3 == LEFT
+				if (enemyTwo.getPosition().x < 40 || obstacleRight(mpcur, enemyTwo.getPosition().x, enemyTwo.getPosition().y) || 
+					distance(enemyTwo.getPosition().x, enemyTwo.getPosition().y, enemy.getPosition().x, enemy.getPosition().y) < 150)
+					enemyTwo.move(0, 0);
+				else {
+					if (distance(enemyTwo.getPosition().x, enemyTwo.getPosition().y, player.getPosition().x, player.getPosition().y) < 150)
+					{
+						cs01 = 2;
+						enemyTwo.setRotation(90);
+						Seangle = 90;
+						enemyTwo.move(0, 0);
+					}
+					else {
+						cs01 = 2;
+						enemyTwo.setRotation(90);
+						Seangle = 90;
+						enemyTwo.move(-2, 0);
+					}
+				}
+				if (nextMove1 == 4) // 4 == GUESS
+					if ((enemyTwo.getPosition().x >= window.getSize().x - 100) || obstacleLeft(mpcur, enemyTwo.getPosition().x, enemyTwo.getPosition().y) || 
+						distance(enemyTwo.getPosition().x, enemyTwo.getPosition().y, enemy.getPosition().x, enemy.getPosition().y) < 150)
+						enemyTwo.move(0, 0);
+					else {
+						if (distance(enemyTwo.getPosition().x, enemyTwo.getPosition().y, player.getPosition().x, player.getPosition().y) < 150)
+						{
+							enemyTwo.setRotation(270);
+							Seangle = 270;
+							cs01 = 3;
+							enemyTwo.move(0, 0);
+						}
+						else {
+							enemyTwo.setRotation(270);
+							Seangle = 270;
+							cs01 = 3;
+							enemyTwo.move(2, 0);
+						}
+					}
+					if (!exp1)
+						if (!s1 && !s2 && !s3 && !s4) {
+							//shot.setVolume(60);
+							//shot.play();
+							attack(fire2, enemyTwo, player, Seangle, timerFireEnemy, Secx, Secy, Sedx, Sedy);
+							ung3 = Seangle-90;
+							if (cs01 == 0 && !s2 && !s3 && !s4)
+								s1 = 1;
+							if (cs01 == 1 && !s1 && !s3 && !s4)
+								s2 = 1;
+							if (cs01 == 2 && !s1 && !s2 && !s4)
+								s3 = 1;
+							if (cs01 == 3 && !s1 && !s2 && !s3)
+								s4 = 1;
+					}
+		if(!exp1)
+			window.draw(enemyTwo);
+		if (timerFireSenemy)
+			timerFireSenemy--;
+		if(!exp1)
+		check(s1, s2, s3, s4, timerFireSenemy, pHealth, ppr , fire2, player,enemyTwo, window, Sedx, Sedy, ung3); // trage inamicul
+		//std::cout << enemyTwolifes << std::endl;
+		if (enemyTwolifes == 5) {
+			std::cout << "DSADADADS" << std::endl;
+			heartOne.setPosition(140, 50);
+			details.draw(heartOne);
+			heartOne.setPosition(180, 50);
+			details.draw(heartOne);
+			heartOne.setPosition(300, 50);
+			details.draw(heartOne);
+			heartOne.setPosition(260, 50);
+			details.draw(heartOne);
+			heartOne.setPosition(220, 50);
+			details.draw(heartOne);
+		}
+		else
+			if (enemyTwolifes == 4) {
+				heartOne.setPosition(180, 50);
+				details.draw(heartOne);
+				heartOne.setPosition(300, 50);
+				details.draw(heartOne);
+				heartOne.setPosition(260, 50);
+				details.draw(heartOne);
+				heartOne.setPosition(220, 50);
+				details.draw(heartOne);
+			}
+			else
+				if (enemyTwolifes == 3) {
+					heartOne.setPosition(300, 50);
+					details.draw(heartOne);
+					heartOne.setPosition(260, 50);
+					details.draw(heartOne);
+					heartOne.setPosition(220, 50);
+					details.draw(heartOne);
+				}
+				else
+					// 2..
+					if (enemyTwolifes == 2) {
+						heartOne.setPosition(300, 50);
+						details.draw(heartOne);
+						heartOne.setPosition(260, 50);
+						details.draw(heartOne);
+					}
+					else
+						//1..
+						if (enemyTwolifes == 1) {
+							heartOne.setPosition(300, 50);
+							details.draw(heartOne);
+						}
+
+} */ // SOME BUGSSSSSSSSSSS
+//()()()ENEMYTWO--------------------
 							if (!exp) // exp = true daca enemy e mort
 								window.draw(enemy);
-							else 
-								window.draw(map); //desenam hart;
 							if (playerLifes <= 1 && pHealth <= 0);
 							else if(!ripPlayer) // ripPlayer e true daca player-ul e mort
 							window.draw(player); // desenam jucatorul
-
-							window.draw(pwUp);
-							window.draw(pwSpeed);
-
 							if (timerFirePlayer)
 									timerFirePlayer--;
 							if (timerFireEnemy)
 									timerFireEnemy--;
-							check(setted1, setted2, setted3, setted4,timerFirePlayer, eHealth, fire, enemy, window, dx ,dy, ung); //trage jucatorul
-							check(st1, st2, st3, st4, timerFireEnemy, pHealth, fire1, player, window, Edx, Edy, ung2); // trage inamicul
-								if (exp) { // enemy emort
+							check(setted1, setted2, setted3, setted4,timerFirePlayer, eHealth, seHealth, fire, enemy, enemyTwo, window, dx ,dy, ung); //trage jucatorul
+							if(!mort)
+								check(st1, st2, st3, st4, timerFireEnemy, pHealth, ppr, fire1, player, enemyTwo, window, Edx, Edy, ung2); // trage inamicul
+							else
+									mort--;
+							if (exp1) {
+									if(exp1 == 50)
+										music.play();
+									make_explosion(window, explosion, exp1);
+									exp1--;
+							}
+							if (exp) { // enemy emort
 									if (exp == 50) // abia a murit si simulam explosia
 										music.play();
 									make_explosion(window, explosion, exp);
 									exp--;
-								}
-							
+							}
 							if (ripPlayer) { // player-ul e mort
 								if (ripPlayer == 50) // abia a murit si simulam explozia
 									music.play();
@@ -764,29 +868,76 @@ else {
 								ripPlayer--;
 							}
 //------------------------VIATILE-JUCATORILOR--------------------------------------------------------------------------------------------------------------------------
-							if (playerLifes == 3) {
-								heartOne.setPosition(340, 0);
+						
+							if (playerLifes == 5) {
+								heartOne.setPosition(140, 0);
+								details.draw(heartOne);
+								heartOne.setPosition(180, 0);
 								details.draw(heartOne);
 								heartOne.setPosition(300, 0);
 								details.draw(heartOne);
 								heartOne.setPosition(260, 0);
 								details.draw(heartOne);
+								heartOne.setPosition(220, 0);
+								details.draw(heartOne);
+							} else
+							if (playerLifes == 4) {
+								heartOne.setPosition(180, 0);
+								details.draw(heartOne);
+								heartOne.setPosition(300, 0);
+								details.draw(heartOne);
+								heartOne.setPosition(260, 0);
+								details.draw(heartOne);
+								heartOne.setPosition(220, 0);
+								details.draw(heartOne);
+							}else
+							if (playerLifes == 3) {
+								heartOne.setPosition(300, 0);
+								details.draw(heartOne);
+								heartOne.setPosition(260, 0);
+								details.draw(heartOne);
+								heartOne.setPosition(220, 0);
+								details.draw(heartOne);
 							}
 							else
 								// 2..
 								if (playerLifes == 2) {
-									heartOne.setPosition(340, 0);
-									details.draw(heartOne);
 									heartOne.setPosition(300, 0);
+									details.draw(heartOne);
+									heartOne.setPosition(260, 0);
 									details.draw(heartOne);
 								}
 								else
 									//1..
 									if (playerLifes == 1) {
-										heartOne.setPosition(340, 0);
+										heartOne.setPosition(300, 0);
 										details.draw(heartOne);
 									}
 							// same here
+							if (enemyLifes == 5) {
+								heartOne.setPosition(480, 0);
+								details.draw(heartOne);
+								heartOne.setPosition(520, 0);
+								details.draw(heartOne);
+								heartOne.setPosition(640, 0);
+								details.draw(heartOne);
+								heartOne.setPosition(600, 0);
+								details.draw(heartOne);
+								heartOne.setPosition(560, 0);
+								details.draw(heartOne);
+							}
+							else
+								if (enemyLifes == 4) {
+									heartOne.setPosition(520, 0);
+									details.draw(heartOne);
+									heartOne.setPosition(640, 0);
+									details.draw(heartOne);
+									heartOne.setPosition(600, 0);
+									details.draw(heartOne);
+									heartOne.setPosition(560, 0);
+									details.draw(heartOne);
+								}
+								else
 							if (enemyLifes == 3) {
 								heartOne.setPosition(640, 0);
 								details.draw(heartOne);
@@ -819,7 +970,8 @@ else {
 								h = std::to_string(eHealth);
 								enemyHealth.setString(h);
 							//(!)
-
+								h = std::to_string(seHealth);
+								enemyTwoHealth.setString(h);
 							//afisare viata player
 								h = std::to_string(pHealth);
 								playerHealth.setString(h);
@@ -831,11 +983,59 @@ else {
 								details.draw(fps);
 								details.draw(playerName);
 								details.draw(enemyName);
+								details.draw(enemyTwoName);
 								details.draw(playerHealth);
+								details.draw(enemyTwoHealth);
 								details.draw(enemyHealth);
 								details.display();
 							//a(1)
 							//daca inamicul e mort definitiv
+							//
+								if (seHealth <= 0 && enemyTwolifes == 1 && enemyLifes <= 0) {
+									std::cout << "!111111" << std::endl;
+									window.clear();
+									enemyTwolifes--;
+									window.draw(map); //desenam hart;
+									window.draw(player);
+									exp1 = 50;
+									for (int i = 1; i <= 25; i++)
+										explosion[i].setPosition(enemyTwo.getPosition().x - 30, enemyTwo.getPosition().y - 30);
+									window.display();
+									displayed = 1;
+								}
+								//daca inamicul  e mort , dar mai are o viata
+								else if (seHealth <= 0 && enemyTwolifes > 1) {
+									std::cout << "!1111222211" << std::endl;
+									seHealth = 1;
+									enemyTwolifes--;
+									window.draw(map); //desenam harta
+									for (int i = 1; i <= 25; i++)
+										explosion[i].setPosition(enemyTwo.getPosition().x - 30, enemyTwo.getPosition().y - 30);
+									exp1 = 50;
+									Secx = 740; Secy = 30; Sedx = 0; Sedy = 0; Seangle = 90;
+									enemyTwo.setPosition(Secx, Secy);
+									window.draw(player);
+									//window.draw(enemy);
+									window.display();
+									displayed = 1;
+								}
+								else if (enemyTwolifes == 0 && !exp1) {
+									std::cout << "!11113211" << std::endl;
+
+									Win.setPosition(300, 300);
+									window.draw(Win);
+									window.display();
+									displayed = 1;
+									sf::Event event;
+									while (window.isOpen())
+										if (window.pollEvent(event))
+											if (event.type == sf::Event::Closed)
+												window.close(), details.close();
+											else
+												if (KeyEsc())
+													window.close(), details.close();
+								}
+							//
 							if (eHealth <= 0 && enemyLifes == 1) {
 										window.clear();
 										enemyLifes--;
@@ -843,24 +1043,25 @@ else {
 										window.draw(player);
 										exp = 50;
 										for(int i = 1; i<=25; i++)
-												explosion[i].setPosition(enemy.getPosition().x, enemy.getPosition().y);
+												explosion[i].setPosition(enemy.getPosition().x - 30, enemy.getPosition().y - 30);
 												window.display();
 												displayed = 1;
 							}
 							//daca inamicul  e mort , dar mai are o viata
 							else if (eHealth <= 0 && enemyLifes > 1) {
-											eHealth = 100;
+											eHealth = 1;
 											enemyLifes--;
 											window.draw(map); //desenam harta
 											for (int i = 1; i <= 25; i++)
-													explosion[i].setPosition(enemy.getPosition().x, enemy.getPosition().y);
+													explosion[i].setPosition(enemy.getPosition().x - 30, enemy.getPosition().y - 30);
 													exp = 50;
-													enemy.setPosition(860, 600);
+													Ecx=830;Ecy=620;Edx=0;Edy=0;Eangle=90;
+													enemy.setPosition(Ecx, Ecy);
 													window.draw(player);
 													window.draw(enemy);
 													window.display();
 													displayed = 1;
-						} else if (enemyLifes == 0 && !exp) {
+						} else if (enemyLifes == 0 && !exp && enemyTwolifes <= 0) {
 											Win.setPosition(300, 300);
 											window.draw(Win);
 											window.display();
@@ -881,18 +1082,20 @@ else {
 											window.draw(map); //desenam harta
 											window.draw(enemy);
 											ripPlayer = 50;
+											mort = 100;
 											for (int i = 1; i <= 25; i++)
-														explosion[i].setPosition(player.getPosition().x, player.getPosition().y);
+														explosion[i].setPosition(player.getPosition().x - 30, player.getPosition().y - 30);
 											window.display();
 											displayed = 1;
 						}
 						else if (pHealth <= 0 && playerLifes> 1) {
-											pHealth = 100;
+											pHealth = 1;
 											playerLifes--;
 											window.draw(map); //desenam harta
 											for (int i = 1; i <= 25; i++)
-													explosion[i].setPosition(player.getPosition().x, player.getPosition().y);
+													explosion[i].setPosition(player.getPosition().x - 30, player.getPosition().y - 30);
 											ripPlayer = 50;
+											mort = 100;
 											player.setPosition(30, 30);
 											cx=cy=30;dx=dy=0;angle=-90;ung=0;
 											window.draw(enemy);
@@ -916,7 +1119,6 @@ else {
 					}
 					if (!displayed)
 									window.display();
-		}
-
-	}
+		} 
+}
 }
