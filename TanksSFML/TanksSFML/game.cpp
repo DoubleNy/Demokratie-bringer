@@ -4,6 +4,7 @@
 #include "tile.cpp"
 #include <time.h>
 #include "maps.h"
+#include <algorithm>
 #include "keyboard.h"
 #include "objects.hpp"
 #include "attack.hpp"
@@ -48,6 +49,31 @@ void game() {
 	enemy.setRotation(Eangle);
 	enemy.setOrigin(80 / 2, 75 / 2);
 	//
+
+
+	sf::RectangleShape pwOneShot(sf::Vector2f(32, 32));
+	sf::RectangleShape pwSpeed(sf::Vector2f(32, 32));
+	sf::RectangleShape pwUp(sf::Vector2f(32, 32));
+	
+		
+		sf::Texture pwOneShotT;
+	pwOneShotT.loadFromFile("oneShot.png");
+	pwOneShot.setTexture(&pwOneShotT);
+	
+		sf::Texture pwSpeedT;
+	pwSpeedT.loadFromFile("speed.png");
+	pwSpeed.setTexture(&pwSpeedT);
+	
+		sf::Texture pwUpT;
+	pwUpT.loadFromFile("heart.png");
+	pwUp.setTexture(&pwUpT);
+	
+		pwUp.setPosition(100, 100);
+	pwSpeed.setPosition(401, 300);
+	pwOneShot.setPosition(300, 300);
+
+	int pwT = 300;
+
 	enemyTwo.setPosition(Secx, Secy);
 	enemyTwo.setRotation(Seangle);
 	enemyTwo.setOrigin(80 / 2, 75 / 2);
@@ -339,6 +365,74 @@ void game() {
 			if (event.type == sf::Event::Closed)
 				details.close();
 		}
+
+//
+
+// management powerUpsuri
+		pwT--;
+		playerSpeed--;
+		enemySpeed--;
+		playerOneShot--;
+		enemyOneShot--;
+		if (pwT == 0) {
+			pwT = 500;
+			int q = rand() % 5;
+			
+				int i = rand() % (29 * 22);
+			while (level[i] == 120 || level[i] == 121 || level[i] == 136 || level[i] == 137 || level[i] == 70 || level[i] == 71 || level[i] == 55 || level[i] == 86 || level[i] == 87 || level[i] == 18 || level[i] == 19 || level[i] == 114 || level[i] == 115 || level[i] == 130 || level[i] == 131)
+				 {
+				{
+					i = rand() % (29 * 22);
+					}
+				}
+			if (q == 0)
+				 pwUp.setPosition(i % 29 * 32, i / 29 * 32);
+			else if (q == 1)
+				 pwOneShot.setPosition(i % 29 * 32, i / 29 * 32);
+			else
+				 pwSpeed.setPosition(i % 29 * 32, i / 29 * 32);
+			
+		}
+		if (player.getGlobalBounds().intersects(pwSpeed.getGlobalBounds()))
+			 {
+			playerSpeed = 200;
+			pwSpeed.setPosition(-100, -100);
+			}
+		if (player.getGlobalBounds().intersects(pwUp.getGlobalBounds()))
+			 {
+			pHealth += 20;
+			if (pHealth > 100)
+				 pHealth = 100;
+			pwUp.setPosition(-100, -100);
+			}
+		if (player.getGlobalBounds().intersects(pwOneShot.getGlobalBounds()))
+			 {
+			playerOneShot = 200;
+			pwOneShot.setPosition(-100, -100);
+			std::cout << "ONE OPORTUNITY";
+			}
+		if (enemy.getGlobalBounds().intersects(pwSpeed.getGlobalBounds()))
+			 {
+			enemySpeed = 200;
+			pwSpeed.setPosition(-100, -100);
+			}
+		if (player.getGlobalBounds().intersects(pwUp.getGlobalBounds()))
+			 {
+			eHealth += 20;
+			if (eHealth>100)
+				 eHealth = 100;
+			pwUp.setPosition(-100, -100);
+			}
+		if (player.getGlobalBounds().intersects(pwOneShot.getGlobalBounds()))
+			 {
+			enemyOneShot = 200;
+			pwOneShot.setPosition(-100, -100);
+			}
+		if (enemy.getGlobalBounds().intersects(fire.getGlobalBounds()) && playerOneShot > 0)
+			 eHealth = 0;
+		if (player.getGlobalBounds().intersects(fire.getGlobalBounds()) && enemyOneShot > 0)
+			 pHealth = 0;
+
 //------------------PLAYER'S MOVEMENTS-------------------------------------------------------------------------------------------------------------------------------------
 		if (1) {
 			if (KeyUp()) {
@@ -674,7 +768,7 @@ else {
 
 
 // A LOT OF BUGS WITH ENEMY TWO
-/*
+
 //ENEMYTWO----------------------------------							
 if(multiplayer == 0 && choosedMap == 1){
 	//window.draw(enemyTwo);
@@ -686,6 +780,8 @@ if(multiplayer == 0 && choosedMap == 1){
 	else
 		cnt2--;
 	//std::cout << nextMove1 << std::endl;
+	if(fromstart)
+		nextMove1 = 2;
 	//-----------------------ENEMY'S MOVEMENTS---------------------------------------------------------------------------------------------------------------------------------------------------
 	if (nextMove1 == 1) // 1 == UP
 		if (enemyTwo.getPosition().y < 40 || obstacleUp(mpcur, enemyTwo.getPosition().x, enemyTwo.getPosition().y))
@@ -782,8 +878,10 @@ if(multiplayer == 0 && choosedMap == 1){
 			window.draw(enemyTwo);
 		if (timerFireSenemy)
 			timerFireSenemy--;
-		if(!exp1)
-		check(s1, s2, s3, s4, timerFireSenemy, pHealth, ppr , fire2, player,enemyTwo, window, Sedx, Sedy, ung3); // trage inamicul
+		fromstart = std::max(fromstart-1, 0);
+		std::cout << "DSADAS" << fromstart << std::endl;
+		if(fromstart <= 0)
+			check(s1, s2, s3, s4, timerFireSenemy, pHealth, ppr , fire2, player,enemyTwo, window, Sedx, Sedy, ung3); // trage inamicul
 		//std::cout << enemyTwolifes << std::endl;
 		if (enemyTwolifes == 5) {
 			std::cout << "DSADADADS" << std::endl;
@@ -832,14 +930,17 @@ if(multiplayer == 0 && choosedMap == 1){
 							heartOne.setPosition(300, 50);
 							details.draw(heartOne);
 						}
-
-} */ // SOME BUGSSSSSSSSSSS
+						details.draw(enemyTwoName);
+						details.draw(enemyTwoHealth);
+}  // SOME BUGSSSSSSSSSSS
 //()()()ENEMYTWO--------------------
 							if (!exp) // exp = true daca enemy e mort
 								window.draw(enemy);
 							if (playerLifes <= 1 && pHealth <= 0);
 							else if(!ripPlayer) // ripPlayer e true daca player-ul e mort
 							window.draw(player); // desenam jucatorul
+							window.draw(pwUp);
+							window.draw(pwSpeed);
 							if (timerFirePlayer)
 									timerFirePlayer--;
 							if (timerFireEnemy)
@@ -983,9 +1084,8 @@ if(multiplayer == 0 && choosedMap == 1){
 								details.draw(fps);
 								details.draw(playerName);
 								details.draw(enemyName);
-								details.draw(enemyTwoName);
 								details.draw(playerHealth);
-								details.draw(enemyTwoHealth);
+
 								details.draw(enemyHealth);
 								details.display();
 							//a(1)
@@ -1012,7 +1112,7 @@ if(multiplayer == 0 && choosedMap == 1){
 									for (int i = 1; i <= 25; i++)
 										explosion[i].setPosition(enemyTwo.getPosition().x - 30, enemyTwo.getPosition().y - 30);
 									exp1 = 50;
-									Secx = 740; Secy = 30; Sedx = 0; Sedy = 0; Seangle = 90;
+									Secx = 740; Secy = 70; Sedx = 0; Sedy = 0; Seangle = 90;
 									enemyTwo.setPosition(Secx, Secy);
 									window.draw(player);
 									//window.draw(enemy);

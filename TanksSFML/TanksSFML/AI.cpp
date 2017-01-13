@@ -8,6 +8,11 @@ int distance(int x1,int y1, int x2, int y2) {
 int next(int ex, int ey, int px, int py,  int &angle,  sf::RectangleShape &enemy) {
 	std::cout << px << ' ' << py << ' ' << ex << ' ' << ey << std::endl;
 	if ((py >= ey - 20 && py <= ey + 20) ){
+		//return(0);
+		if (px > ex)
+			enemy.setRotation(-90), angle = -90;
+		else
+			enemy.setRotation(90), angle = 90;
 		return(0);
 	}
 	if (px >= ex - 20 && px <= ex + 20) {
